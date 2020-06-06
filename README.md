@@ -17,8 +17,17 @@ For the complete list of results please check the **results/** folder
 - Cuda 9.0
 
 ## Running the tests
+```
+import experiments.run_experiments as re
+re.run(dataset_name, bins, iterations)
+```
 
-Explain how to run the automated tests for this system
+- dataset_name
+
+Example:
+import experiments.run_experiments as re
+re.run("brazil_airtraffic", 3, 1)
+
 
 ### In order to run a custom test
 
