@@ -4,7 +4,7 @@ One Paragraph of project description goes here
 
 ## Getting Started
 
-For the complete list of results please check the **results/** folder
+For the complete list of results please check the **"results/"** folder
 
 ### Prerequisites
 - python 3.6
@@ -24,17 +24,18 @@ import experiments.run_experiments as re
 re.run(dataset_name, bins, iterations)
 ```
 
-- **dataset_name**: Name of the dataset to be tested, as defined in the  "data\" folder
+- **dataset_name**: Name of the dataset to be tested, as defined in the  **"data\"** folder
 - **bins**: The number of bins (classes) to split the continuous topological features into
 - **iterations**: The number of times to iterate the experiments (the results will be the mean)
 
 Example:
+```
 import experiments.run_experiments as re
 re.run("brazil_airtraffic", 3, 1)
-
+```
 
 ### In order to run a custom test
-In order to run a custom experiment
+In order to run a custom experiment:
 ```
 import evaluate_embeddings.visualize_embeddings as ve
 import experiments.utils as eu
@@ -53,6 +54,12 @@ eu.iterate_experiments(
      
 ve.visualize_results()
 ```
+- **load_dataset**: Loads a predefined dataset, the dataset name should be as defined in the  **"data\"** folder
+- **save_topo_features**: Calculates the topological features of the vertices
+- **generate_features_labels**: Performs the binning operation, according to the number of **bins** defined by the user
+- **iterate_experiments**: takes as a parameter the list of embedding models to be tested and the number of iterations to run the experiments
+- **visualize_results**: Plots the embeddings of 4 models: gae_first, gae_concat, gae_l1_sum ,matrix_factorization
+
 ### In order to load a custom dataset
 
 
