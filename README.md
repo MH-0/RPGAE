@@ -34,8 +34,7 @@ import experiments.run_experiments as re
 re.run("brazil_airtraffic", 3, 1)
 ```
 
-### In order to run a custom test
-In order to run a custom experiment:
+### In order to run a custom experiment
 ```
 import evaluate_embeddings.visualize_embeddings as ve
 import experiments.utils as eu
@@ -61,5 +60,11 @@ ve.visualize_results()
 - **visualize_results**: Plots the embeddings of 4 models: gae_first, gae_concat, gae_l1_sum ,matrix_factorization
 
 ### In order to load a custom dataset
-
-
+Place the new dataset folder in the **"data"** folder, the graph files should be placed in a sub folder named **"graph"**
+example : data\newdataset\graph\
+3 graph files can be placed in the **"graph"**
+All files can be comma "," or tab"\t" or  space " " seperated 
+the same seperator should be used in all 3 files
+- **edges.txt**: A text file containing the list of edges  "Node1 sperator Node2"
+- **groundtruth.txt**: A text file containing the list of classes "Node Class"
+- **attributes.txt**: A text file containing the list of attributes " Node Attribute 1, Attribute2, ..."
