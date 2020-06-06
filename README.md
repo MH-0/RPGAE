@@ -16,7 +16,7 @@ For the complete list of results please check the **"results/"** folder
 - node2vec 0.3.2
 - cuda 9.0
 
-## Running the tests
+## Running Experiments
 
 In order to run a test on a dataset, exectute the below code snippet:
 ```
@@ -34,7 +34,7 @@ import experiments.run_experiments as re
 re.run("brazil_airtraffic", 3, 1)
 ```
 
-### In order to run a custom experiment
+### Running Custom Experiment
 ```
 import evaluate_embeddings.visualize_embeddings as ve
 import experiments.utils as eu
@@ -59,21 +59,19 @@ ve.visualize_results()
 - **iterate_experiments**: takes as a parameter the list of embedding models to be tested and the number of iterations to run the experiments
 - **visualize_results**: Plots the embeddings of 4 models: gae_first, gae_concat, gae_l1_sum ,matrix_factorization
 
-### In order to load a custom dataset
+### Loading Custom Dataset
 Place the new dataset folder in the **"data"** folder, the graph files should be placed in a sub folder named **"graph"**
 
 example : data\newdataset\graph\
 
-3 files can be placed in the **"graph"**
-
-All files can be comma "," or tab"\t" or  space " " seperated 
+3 files can be placed in the **"graph"**, all files can be comma "," or tab"\t" or  space " " seperated 
 
 The same seperator should be used in all 3 files
 - **edges.txt**: A text file containing the list of edges  "Node1 sperator Node2" (Mandatory)
 - **groundtruth.txt**: A text file containing the list of classes "Node Class" (if the vertices have a ground truth)
 - **attributes.txt**: A text file containing the list of attributes " Node Attribute 1, Attribute2, ..." (if the vertices are attributed)
 
-In order to load the dataset use the function **load_custom_dataset** insteam of **load_dataset**
+In order to load a custom dataset use the function **load_custom_dataset** instead of **load_dataset**
 
 ```
 load_custom_dataset(dataset_name, with_attributes, with_labels, directed, separator)
@@ -87,5 +85,6 @@ load_custom_dataset(dataset_name, with_attributes, with_labels, directed, separa
 Example:
 
 ```
-ut.load_dataset("europe_airtraffic", False, True, False, " ")
+import pretreatment.utils as ut
+ut.load_custom_dataset("europe_airtraffic", False, True, False, " ")
 ```
