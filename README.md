@@ -7,7 +7,6 @@ One Paragraph of project description goes here
 For the complete list of results please check the **results/** folder
 
 ### Prerequisites
-The experiments were performed with the following prerequisites:
 - python 3.6
 - dgl-cu90 0.4.3
 - torch 1.4
