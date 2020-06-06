@@ -17,12 +17,16 @@ For the complete list of results please check the **results/** folder
 - Cuda 9.0
 
 ## Running the tests
+
+In order to run a test on a dataset, exectute the below code snippet:
 ```
 import experiments.run_experiments as re
 re.run(dataset_name, bins, iterations)
 ```
 
-- dataset_name
+- dataset_name: name of the dataset to be tested as defined in the  **data\** folder
+- bins: the number of bins (classes) to split the continuous topological features into
+- iterations: the number of times to iterate the experiments (the results will be the mean)
 
 Example:
 import experiments.run_experiments as re
