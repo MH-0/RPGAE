@@ -6,6 +6,23 @@ One Paragraph of project description goes here
 
 For the complete list of results please check the **"results/"** folder
 
+
+## Experimental Datasets
+
+|Dataset                 |Nodes |Edges |Classes |Type          |
+| -                      |-     |     -|-       |-             |
+|Cora                    |2,708 |5,429 |7       |Citation      |
+|Citeseer                |3,327 |4,732 |6       |Citation      |
+|email-Eu-core           |1,005 |25,571|42      |Email         |
+|USA Air-Traffic         |1,190 |13,599|4       |Flight        |
+|Europe Air-Traffic      |399   |5,995 |4       |Flight        |
+|Brazil Air-Traffic      |131   |1,074  |4       |Flight        |
+|fly-drosophila-medulla-1|1,781 |9,016 |NA      |Biological    |
+|ego-Facebook            |4,039 |88,234|NA      |Social        |
+|soc-sign-bitcoin-alpha  |3,783 |24,186|NA      |Blockchain    |
+|soc-sign-bitcoin-otc    |5,881 |35,592|NA      |Blockchain    |
+|ca-GrQc                 |5,242 |14,496|NA      |Collaboration |
+
 ### Prerequisites
 - python 3.6
 - dgl-cu90 0.4.3
