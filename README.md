@@ -14,7 +14,7 @@ For the complete list of results please check the **"results/"** folder
 - numpy 1.18.1
 - scikit-learn 0.22.2
 - node2vec 0.3.2
-- Cuda 9.0
+- cuda 9.0
 
 ## Running the tests
 
@@ -61,10 +61,31 @@ ve.visualize_results()
 
 ### In order to load a custom dataset
 Place the new dataset folder in the **"data"** folder, the graph files should be placed in a sub folder named **"graph"**
+
 example : data\newdataset\graph\
-3 graph files can be placed in the **"graph"**
+
+3 files can be placed in the **"graph"**
+
 All files can be comma "," or tab"\t" or  space " " seperated 
-the same seperator should be used in all 3 files
-- **edges.txt**: A text file containing the list of edges  "Node1 sperator Node2"
-- **groundtruth.txt**: A text file containing the list of classes "Node Class"
-- **attributes.txt**: A text file containing the list of attributes " Node Attribute 1, Attribute2, ..."
+
+The same seperator should be used in all 3 files
+- **edges.txt**: A text file containing the list of edges  "Node1 sperator Node2" (Mandatory)
+- **groundtruth.txt**: A text file containing the list of classes "Node Class" (if the vertices have a ground truth)
+- **attributes.txt**: A text file containing the list of attributes " Node Attribute 1, Attribute2, ..." (if the vertices are attributed)
+
+In order to load the dataset use the function **load_custom_dataset** insteam of **load_dataset**
+
+```
+load_custom_dataset(dataset_name, with_attributes, with_labels, directed, separator)
+```
+- **dataset_name**: the name of the custom dataset
+- **with_attributes**: if the graph is attributed
+- **with_labels**: if the vertices have ground truth
+- **directed**: if the graph is directed 
+- **separator**: the seperator " " or "\t" or ","
+
+Example:
+
+```
+ut.load_dataset("europe_airtraffic", False, True, False, " ")
+```
