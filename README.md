@@ -16,7 +16,7 @@ For the complete list of results please check the **"results/"** folder.
 - node2vec 0.3.2
 - cuda 9.0
 
-## Experimental Datasets
+### Experimental Datasets
 
 |Dataset                 |Nodes |Edges |Classes |Type          |BINS | 
 | -                      |-     |     -|-       |-             |-    |
@@ -32,7 +32,7 @@ For the complete list of results please check the **"results/"** folder.
 |soc-sign-bitcoin-otc    |5,881 |35,592|NA      |Blockchain    |6|
 |ca-GrQc                 |5,242 |14,496|NA      |Collaboration |4|
 
-## Compared Models
+### Compared Models
 |Model | Description|
 |-     | -           |
 |GAE_L1_SUM | A Graph Autoencoder with 1 layer that employs the SUM aggregation rule|
