@@ -3,8 +3,10 @@
 One Paragraph of project description goes here
 
 ## Getting Started
+```diff
+- For the complete list of results please check the **"results/"** folder
+```
 
-For the complete list of results please check the **"results/"** folder
 
 
 ## Experimental Datasets
