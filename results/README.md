@@ -4,117 +4,16 @@ In this study, we look into the representational power of Graph Autoencoders (GA
 
 ## Getting Started
 
-For the complete list of results please check the **"results/"** folder.
-
-### Prerequisites
-- python 3.6
-- dgl-cu90 0.4.3
-- torch 1.4
-- networkx 2.4
-- numpy 1.18.1
-- scikit-learn 0.22.2
-- node2vec 0.3.2
-- cuda 9.0
-
-### Experimental Datasets
-
-|Dataset                 |Nodes |Edges |Classes |Type          |BINS | 
-| -                      |-     |     -|-       |-             |-    |
-|Cora                    |2,708 |5,429 |7       |Citation      |6|
-|Citeseer                |3,327 |4,732 |6       |Citation      |6|
-|email-Eu-core           |1,005 |25,571|42      |Email         |6|
-|USA Air-Traffic         |1,190 |13,599|4       |Flight        |3|
-|Europe Air-Traffic      |399   |5,995 |4       |Flight        |3|
-|Brazil Air-Traffic      |131   |1,074  |4       |Flight        |3|
-|fly-drosophila-medulla-1|1,781 |9,016 |NA      |Biological    |6|
-|ego-Facebook            |4,039 |88,234|NA      |Social        |6|
-|soc-sign-bitcoin-alpha  |3,783 |24,186|NA      |Blockchain    |6|
-|soc-sign-bitcoin-otc    |5,881 |35,592|NA      |Blockchain    |6|
-|ca-GrQc                 |5,242 |14,496|NA      |Collaboration |4|
-
-### Compared Models
-|Model | Description|
-|-     | -           |
-|GAE_L1_SUM | A Graph Autoencoder with 1 layer that employs the SUM aggregation rule|
-|GAE_L2_SUM | A Graph Autoencoder with 2 layers that employs the SUM aggregation rule|
-|GAE_FIRST | A Graph Autoencoder that employs the SUM aggregation rule but uses the output of the first layer as embedding|
-|GAE_CONCAT| A Graph Autoencoder that employs the SUM aggregation rule but concatenates the output of all layers as embedding|
-|GAE_MEAN|A Graph Autoencoder that employs the MEAN aggregation rule|
-|GAE_SPECTRAL|A Graph Autoencoder that employs the SPECTRAL rule (GCN)|
-|GAE_MIXED| A Graph Autoencoder that employes the MEAN aggregation rule but that reconstructs 2 orders of proximity|
-|Matrix Factorization| Laplacian eigenmaps (scikit-learn implementation)|
-|Nove2Vec_Structural| Node2vec with p=0.5 q =2|
-|Nod2Vec_Homophily| Node2vec with p=1 q=0.5| 
-
-## Running Experiments
-
-In order to run a test on a dataset, exectute the below code snippet:
-```
-import experiments.run_experiments as re
-re.run(dataset_name, bins, iterations)
-```
-
-- **dataset_name**: Name of the dataset to be tested, as defined in the  **"data\"** folder
-- **bins**: The number of bins (classes) to split the continuous topological features into
-- **iterations**: The number of times to iterate the experiments (the results will be the mean)
-
-Example:
-```
-import experiments.run_experiments as re
-re.run("brazil_airtraffic", 3, 1)
-```
-
-### Running Custom Experiment
-```
-import evaluate_embeddings.visualize_embeddings as ve
-import experiments.utils as eu
-import pretreatment.topo_features as tf
-import pretreatment.utils as ut
-
-ut.load_dataset(dataset_name)
-  
-tf.save_topo_features()
-
-tf.generate_features_labels(bins)
-
-eu.iterate_experiments(
-    ["gae_l1_sum", "gae_l2_sum", "gae_concat", "gae_first", "gae_mean", "gae_mixed", "gae_spectral",
-     "matrix_factorization", "Nove2Vec_Structural", "Nod2Vec_Homophily"], iterations)
-     
-ve.visualize_results()
-```
-- **load_dataset**: Loads a predefined dataset, the dataset name should be as defined in the  **"data\"** folder
-- **save_topo_features**: Calculates the topological features of the vertices
-- **generate_features_labels**: Performs the binning operation, according to the number of **bins** defined by the user
-- **iterate_experiments**: Takes as a parameter the list of embedding models to be tested and the number of iterations to run the experiments
-- **visualize_results**: Plots the embeddings of 4 models: gae_first, gae_concat, gae_l1_sum ,matrix_factorization
-
-### Loading Custom Dataset
-Place the new dataset folder in the **"data\"** folder, the graph files should be placed in a sub folder named **"graph"**
-
-example : data\newdataset\graph\
-
-3 files can be placed in the **"graph\"** folder. All files can be comma "," or tab"\t" or  space " " seperated 
-
-The same seperator should be used in all 3 files
-- **edges.txt**: A text file containing the list of edges  "Node1 sperator Node2" (Mandatory)
-- **groundtruth.txt**: A text file containing the list of classes "Node Class" (if the vertices have a ground truth)
-- **attributes.txt**: A text file containing the list of attributes " Node Attribute 1, Attribute2, ..." (if the vertices are attributed)
-
-In order to load a custom dataset use the function **load_custom_dataset** instead of **load_dataset**
-
-```
-load_custom_dataset(dataset_name, with_attributes, with_labels, directed, separator)
-```
-- **dataset_name**: the name of the custom dataset
-- **with_attributes**: if the graph is attributed
-- **with_labels**: if the vertices have ground truth
-- **directed**: if the graph is directed 
-- **separator**: the seperator " " or "\t" or ","
-
-Example:
-
-```
-import pretreatment.utils as ut
-ut.load_custom_dataset("europe_airtraffic", False, True, False, " ")
-```
+|                      |  Cora |       |        | email-Eu-core |       |       | Citeseer |       |       | USA Air-Traffic |       |       | Europe Air-Traffic |       |       | Brazil Air-Traffic |       |        |
+|----------------------|:-----:|:-----:|:------:|:-------------:|:-----:|:-----:|:--------:|:-----:|:-----:|:---------------:|:-----:|:-----:|:------------------:|:-----:|:-----:|:------------------:|:-----:|:------:|
+| Models               |  ACC  |  NMI  |   ARI  |      ACC      |  NMI  |  ARI  |    ACC   |  NMI  |  ARI  |       ACC       |  NMI  |  ARI  |         ACC        |  NMI  |  ARI  |         ACC        |  NMI  |   ARI  |
+| GAE\_FIRST           | **0.448** | 0.309 |  0.138 |     0.355     | 0.560 | 0.227 |   0.369  | 0.186 | 0.048 |      0.475      | 0.270 | 0.196 |        0.425       | 0.200 | 0.177 |        0.506       | 0.299 |  0.237 |
+| GAE\_CONCAT          | 0.579 | 0.436 |  0.363 |     0.342     | 0.556 | 0.245 |   0.430  | 0.211 | 0.152 |      0.491      | 0.206 | 0.191 |        0.396       | 0.113 | 0.098 |        0.495       | 0.300 |  0.240 |
+| GAE\_L1\_SUM         | 0.411 | 0.226 |  0.066 |     0.366     | 0.534 | 0.169 |   0.236  | 0.062 | 0.000 |      0.476      | 0.239 | 0.174 |        0.410       | 0.132 | 0.122 |        0.473       | 0.246 |  0.169 |
+| GAE\_L2\_SUM         | 0.638 | 0.465 |  0.408 |     0.360     | 0.568 | 0.293 |   0.456  | 0.233 | 0.181 |      0.445      | 0.132 | 0.125 |        0.370       | 0.083 | 0.053 |        0.444       | 0.203 |  0.127 |
+| GAE\_MEAN            | 0.635 | 0.487 |  0.405 |     0.427     | 0.598 | 0.348 |   0.580  | 0.318 | 0.318 |      0.428      | 0.121 | 0.115 |        0.316       | 0.042 | 0.013 |        0.352       | 0.087 |  0.030 |
+| GAE\_MIXED           |  0.66 | 0.508 |  0.423 |     0.417     | 0.589 | 0.336 |   0.631  | 0.379 | 0.381 |      0.463      | 0.167 | 0.168 |        0.327       | 0.053 | 0.018 |        0.348       | 0.104 |  0.024 |
+| GAE\_SPECTRAL        | 0.420 | 0.223 |  0.145 |     0.396     | 0.541 | 0.161 |   0.360  | 0.101 | 0.091 |      0.362      | 0.062 | 0.037 |        0.436       | 0.199 | 0.165 |        0.455       | 0.214 |  0.164 |
+| Matrix Factorization | 0.303 | 0.014 | -0.001 |     0.178     | 0.234 | 0.011 |   0.229  | 0.025 | 0.008 |      0.253      | 0.010 | 0.000 |        0.26        | 0.025 | 0.001 |        0.256       | 0.043 | -0.001 |
+| Node2Vec-S           | 0.226 | 0.004 | -0.000 |     0.110     | 0.193 | 0.001 |   0.203  | 0.003 | 0.000 |      0.282      | 0.006 | 0.002 |        0.316       | 0.026 | 0.017 |        0.311       | 0.023 |  0.000 |
+| Node2Vec-H           | 0.219 | 0.004 |  0.001 |     0.109     | 0.190 | 0.002 |   0.206  | 0.004 | 0.000 |      0.287      | 0.007 | 0.005 |        0.315       | 0.026 | 0.013 |        0.320       | 0.031 |  0.004 |
