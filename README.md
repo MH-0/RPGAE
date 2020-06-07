@@ -64,7 +64,7 @@ import experiments.run_experiments as re
 re.run("brazil_airtraffic", 3, 1)
 ```
 
-### Running Custom Experiment
+### Running a Custom Experiment
 ```
 import evaluate_embeddings.visualize_embeddings as ve
 import experiments.utils as eu
@@ -89,7 +89,7 @@ ve.visualize_results()
 - **iterate_experiments**: Takes as a parameter the list of embedding models to be tested and the number of iterations to run the experiments
 - **visualize_results**: Plots the embeddings of 4 models: gae_first, gae_concat, gae_l1_sum ,matrix_factorization
 
-### Loading Custom Dataset
+### Loading a Custom Dataset
 Place the new dataset folder in the **"data\"** folder, the graph files should be placed in a sub folder named **"graph"**
 
 example : data\newdataset\graph\
