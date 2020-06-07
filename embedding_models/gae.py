@@ -1,11 +1,12 @@
 """
-Graph autoencoder model
-4 variations:
--gae_sum (aggregation by sum of the features)
+Graph autoencoder models
+6 variations:
+-gae_l1_sum (aggregation by sum of the features - with 1 layer encoder)
+-gae_l2_sum (aggregation by sum of the features - with 2 layers encoder)
+-gae_first (aggregation by sum but with first layer output as embedding)
+-gae_concat (aggregation by sum but with concatenation of the output of all layers as embedding)
 -gae_mean (aggregation by mean of the features)
 -gae_spectral (applies the spectral filter)
--gae_sum_concat (aggregation by sum but with concatenation of the output
-of each layer of the encoder to form the emebdding)
 """
 
 # load libraries
@@ -38,7 +39,6 @@ def gcn_reduce_custom(nodes):
 
 
 network_type = ""
-
 
 class EncoderLayer(nn.Module):
     """
@@ -159,7 +159,7 @@ def train(graph, model_name, inputs, input_size, hidden_size, embedding_size, ep
     """
     This function trains the graph autoencoder in order to generate the embeddings of the graph (a vector per node)
     :param graph: a networkx graph for a time step
-    :param model_name: the name of the model (gae_sum,gae_mean,gae_spectral,gae_sum_concat)
+    :param model_name: the name of the model (gae_l1_sum,gae_l2_sum,gae_mean,gae_spectral,gae_concat,gae_first)
     :param inputs: the attributes to be used as input
     :param input_size: the size of the input
     :param hidden_size: the hidden layer size
@@ -211,11 +211,11 @@ def train(graph, model_name, inputs, input_size, hidden_size, embedding_size, ep
     for epoch in range(epochs):
         if network_type == "gae_spectral":
             predicted, embedding = gae.forward_spectral(dgl_graph, inputs)
-        elif network_type == "gae_one":
+        elif network_type == "gae_l1_sum":
             predicted, embedding = gae.forward_1_layer(dgl_graph, inputs)
         elif network_type == "gae_first":
             predicted, embedding = gae.forward_first_layer(dgl_graph, inputs)
-        elif network_type == "gae_sum_concat":
+        elif network_type == "gae_concat":
             predicted, embedding = gae.forward_concat_layer(dgl_graph, inputs)
         else:
             predicted, embedding = gae.forward_2_layers(dgl_graph, inputs)

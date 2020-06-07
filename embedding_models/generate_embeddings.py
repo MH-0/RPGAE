@@ -24,11 +24,11 @@ def gae_embedding(model_name):
     """
     generate the embeddings of the Graph autoenders
     :param model_name: name of the gae model
-    (gae_sum, gae_mean, gae_sum_concat,gae_spectral,gae_mixed)
+    (gae_l1_sum,gae_l2_sum, gae_mean, gae_concat,gae_first,gae_spectral,gae_mixed)
     :return: embedding
     """
 
-    if model_name == "gae_sum_concat":
+    if model_name == "gae_concat":
         layer_size = 32
     else:
         layer_size = 64

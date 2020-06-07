@@ -202,7 +202,7 @@ def load_custom_dataset(dataset_name, with_attributes, with_labels, directed, se
     global input_size
 
     # data folder path
-    data_path = "..\\data\\" + dataset_name + "\\"
+    data_path = "data\\" + dataset_name + "\\"
 
     # graph folder path
     graph_path = data_path + "graph\\"

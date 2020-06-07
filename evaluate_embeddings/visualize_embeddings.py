@@ -11,7 +11,7 @@ from sklearn.manifold import TSNE
 import pretreatment.utils as ut
 
 
-def visualise_single_embedding(embedding, plot_index, axs):
+def visualise_single_embedding(embedding, model_name, plot_index, axs):
     """
     Visualize the embeddings of a model
     :param embedding: the embedding matrix
@@ -31,8 +31,10 @@ def visualise_single_embedding(embedding, plot_index, axs):
     # random.shuffle(dot_colors)
     dot_colors = ["blue", "red", "orange", "green", "yellow", "cyan", "purple", "black", "pink"]
 
-    label_types = ["node_labels", "degree_lables", "betweenness_centrality_lables", "clustering_lables","eigenvector_centrality_lables"]
-    titles = ["label", "degree", "betweenness", "clustering","eigenvector"]
+    label_types = ["node_labels", "degree_lables", "betweenness_centrality_lables", "clustering_lables",
+                   "eigenvector_centrality_lables"]
+    titles = [model_name + " " + "label", model_name + " " + "degree", model_name + " " + "betweenness",
+              model_name + " " + "clustering", model_name + " " + "eigenvector"]
 
     plot_secondary_index = 0
     # loop through the label types and plot it
@@ -58,7 +60,7 @@ def visualise_single_embedding(embedding, plot_index, axs):
         plot_secondary_index += 1
 
 
-def visualize_results():
+def visualize_results(save_plot= False):
     """
     visualize the embeddings of multiple models in a scatter plot
     """
@@ -66,19 +68,20 @@ def visualize_results():
     fig.set_figheight(16)
     fig.set_figwidth(16)
     embedding = ut.load_numpy_file(ut.embedding_path + "gae_first_embedding.npy")
-    visualise_single_embedding(embedding, 0, axs)
-    embedding = ut.load_numpy_file(ut.embedding_path + "gae_sum_concat_embedding.npy")
-    visualise_single_embedding(embedding, 1, axs)
+    visualise_single_embedding(embedding,"gae_first", 0, axs)
+    embedding = ut.load_numpy_file(ut.embedding_path + "gae_concat_embedding.npy")
+    visualise_single_embedding(embedding,"gae_concat", 1, axs)
     embedding = ut.load_numpy_file(ut.embedding_path + "gae_mixed_embedding.npy")
-    visualise_single_embedding(embedding, 2, axs)
-    embedding = ut.load_numpy_file(ut.embedding_path + "gae_one_embedding.npy")
-    visualise_single_embedding(embedding, 3, axs)
+    visualise_single_embedding(embedding,"gae_mixed", 2, axs)
+    embedding = ut.load_numpy_file(ut.embedding_path + "gae_l1_sum_embedding.npy")
+    visualise_single_embedding(embedding,"gae_l1_sum", 3, axs)
     embedding = ut.load_numpy_file(ut.embedding_path + "matrix_factorization_embedding.npy")
-    visualise_single_embedding(embedding, 4, axs)
+    visualise_single_embedding(embedding,"MF", 4, axs)
     for ax in axs.flat:
         ax.label_outer()
     plt.tight_layout()
-    # plt.savefig('embedding.png', dpi=200)
+    if save_plot :
+        plt.savefig('embedding.png', dpi=200)
     plt.show()
 
 
@@ -98,7 +101,7 @@ def visualize_Large(model_name, feature):
     area = np.pi * 3
     dot_colors = ["blue", "red", "orange", "green", "yellow", "cyan", "purple", "black", "pink"]
 
-    label_types = [feature+"_lables"]
+    label_types = [feature + "_lables"]
     plot_secondary_index = 0
     for label_type in label_types:
         if label_type == "node_labels":

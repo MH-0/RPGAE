@@ -20,12 +20,8 @@ def calculate_topo_features():
     Calculate topological features
     """
     print(dict(nx.degree(ut.graph)))
-    print(nx.degree_centrality(ut.graph))
-    print(nx.triangles(ut.graph))
     print(nx.clustering(ut.graph))
     print(nx.eigenvector_centrality_numpy(ut.graph))
-    print(nx.katz_centrality_numpy(ut.graph))
-    print(nx.pagerank_numpy(ut.graph))
     print(nx.betweenness_centrality(ut.graph))
 
 
@@ -75,41 +71,24 @@ def save_topo_features():
     and save them to a file
     """
     degree = np.array(list(dict(nx.degree(ut.graph)).values()))
-    degree_centrality = np.array(list(nx.degree_centrality(ut.graph).values()))
-    # triangles = np.array(list(nx.triangles(ut.graph).values()))
-    triangles = degree
     clustering = np.array(list(nx.clustering(ut.graph).values()))
     eigenvector_centrality = np.array(list(nx.eigenvector_centrality_numpy(ut.graph).values()))
-    katz_centrality = np.array(list(nx.katz_centrality_numpy(ut.graph).values()))
-    pagerank = np.array(list(nx.pagerank_numpy(ut.graph).values()))
     betweenness_centrality = np.array(list(nx.betweenness_centrality(ut.graph).values()))
 
 
     np.save(ut.topo_features_path + "degree.npy", degree)
-    np.save(ut.topo_features_path + "degree_centrality.npy", degree_centrality)
-    np.save(ut.topo_features_path + "triangles.npy", triangles)
     np.save(ut.topo_features_path + "clustering.npy", clustering)
     np.save(ut.topo_features_path + "eigenvector_centrality.npy", eigenvector_centrality)
-    np.save(ut.topo_features_path + "katz_centrality.npy", katz_centrality)
-    np.save(ut.topo_features_path + "pagerank.npy", pagerank)
     np.save(ut.topo_features_path + "betweenness_centrality.npy", betweenness_centrality)
 
     # concatenate the features (in case to be used as entry)
     degree = np.reshape(degree, (-1, 1))
-    degree_centrality = np.reshape(degree_centrality, (-1, 1))
-    triangles = np.reshape(triangles, (-1, 1))
     clustering = np.reshape(clustering, (-1, 1))
     eigenvector_centrality = np.reshape(eigenvector_centrality, (-1, 1))
-    katz_centrality = np.reshape(katz_centrality, (-1, 1))
-    pagerank = np.reshape(pagerank, (-1, 1))
     betweenness_centrality = np.reshape(betweenness_centrality, (-1, 1))
 
-    topofeatures = np.concatenate([degree, degree_centrality], axis=1)
-    topofeatures = np.concatenate([topofeatures, triangles], axis=1)
-    topofeatures = np.concatenate([topofeatures, clustering], axis=1)
+    topofeatures = np.concatenate([degree, clustering], axis=1)
     topofeatures = np.concatenate([topofeatures, eigenvector_centrality], axis=1)
-    topofeatures = np.concatenate([topofeatures, katz_centrality], axis=1)
-    topofeatures = np.concatenate([topofeatures, pagerank], axis=1)
     topofeatures = np.concatenate([topofeatures, betweenness_centrality], axis=1)
     np.save(ut.topo_features_path + "topofeatures.npy", topofeatures)
     topofeatures = ut.load_numpy_file(ut.topo_features_path + "topofeatures.npy")
@@ -165,19 +144,11 @@ def generate_features_labels(bins):
     :param bins: The number of bins
     """
     degree = ut.load_numpy_file(ut.topo_features_path + "degree.npy")
-    degree_centrality = ut.load_numpy_file(ut.topo_features_path + "degree_centrality.npy")
-    triangles = ut.load_numpy_file(ut.topo_features_path + "triangles.npy")
     clustering = ut.load_numpy_file(ut.topo_features_path + "clustering.npy")
     eigenvector_centrality = ut.load_numpy_file(ut.topo_features_path + "eigenvector_centrality.npy")
-    katz_centrality = ut.load_numpy_file(ut.topo_features_path + "katz_centrality.npy")
-    pagerank = ut.load_numpy_file(ut.topo_features_path + "pagerank.npy")
     betweenness_centrality = ut.load_numpy_file(ut.topo_features_path + "betweenness_centrality.npy")
 
     bin_feature(degree, "degree", False, bins)
-    bin_feature(degree_centrality, "degree_centrality", False, bins)
-    bin_feature(triangles, "triangles", False, bins)
     bin_feature(clustering, "clustering", False, bins)
     bin_feature(eigenvector_centrality, "eigenvector_centrality", False, bins)
-    bin_feature(katz_centrality, "katz_centrality", False, bins)
-    bin_feature(pagerank, "pagerank", False, bins)
     bin_feature(betweenness_centrality, "betweenness_centrality", False, bins)

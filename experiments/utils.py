@@ -8,7 +8,6 @@ import evaluate_embeddings.classify_embeddings as ce
 import evaluate_embeddings.classify_features as cf
 import evaluate_embeddings.cluster_embeddings as cl
 import evaluate_embeddings.cluster_similarity as cs
-import evaluate_embeddings.link_prediction as lp
 import pretreatment.utils as ut
 
 
@@ -61,7 +60,6 @@ def experiment_by_model(embedding_model_name, iterations):
     cl.setup_score(embedding_model_name)
     # for cluster evaluation
     cs.setup_score(embedding_model_name)
-
 
     # iterate through number of experiments
     for iteration in range(0, iterations):

@@ -1,27 +1,28 @@
-import pretreatment.utils as ut
-import pretreatment.topo_features as tf
-import experiments.utils as eu
 import evaluate_embeddings.visualize_embeddings as ve
+import experiments.utils as eu
+import pretreatment.topo_features as tf
+import pretreatment.utils as ut
 
-# load the graph data into memory
-ut. load_dataset("cora")
-# # generate topological features
-# # ------------------------------
-# tf.save_topo_features()
 
-# # binning topological features
-# # -----------------------------
-# tf.generate_features_labels(6)
+def run(dataset_name, bins, iterations):
+    # load the graph data into memory
+    # ------------------------------
+    ut.load_dataset(dataset_name)
 
-# run experiments
-# ------------------
-# eu.iterate_experiments([ "gae_first"], 1)
+    # generate topological features
+    # ------------------------------
+    tf.save_topo_features()
 
-# eu.iterate_experiments(["gae_one", "gae_sum", "gae_sum_concat", "gae_first", "gae_mean", "gae_mixed", "gae_spectral",
-#                         "matrix_factorization","Nove2Vec_Structural","Nod2Vec_Homophily"], 10)
+    # binning topological features
+    # -----------------------------
+    tf.generate_features_labels(bins)
 
-# # visualize results
-# # ----------------------
+    # run experiments
+    # ------------------
+    eu.iterate_experiments(
+        ["gae_l1_sum", "gae_l2_sum", "gae_concat", "gae_first", "gae_mean", "gae_mixed", "gae_spectral",
+         "matrix_factorization", "Nove2Vec_Structural", "Nod2Vec_Homophily"], iterations)
 
-# ve.visualize_results()
-ve.visualize_Large("gae_first","degree")
+    # visualize results
+    # ----------------------
+    ve.visualize_results()
