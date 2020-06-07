@@ -18,19 +18,19 @@ For the complete list of results please check the **"results/"** folder.
 
 ### Experimental Datasets
 
-|Dataset                 |Nodes |Edges |Classes |Type          |BINS | 
-| -                      |-     |     -|-       |-             |-    |
-|Cora                    |2,708 |5,429 |7       |Citation      |6|
-|Citeseer                |3,327 |4,732 |6       |Citation      |6|
-|email-Eu-core           |1,005 |25,571|42      |Email         |6|
-|USA Air-Traffic         |1,190 |13,599|4       |Flight        |3|
-|Europe Air-Traffic      |399   |5,995 |4       |Flight        |3|
-|Brazil Air-Traffic      |131   |1,074  |4       |Flight        |3|
-|fly-drosophila-medulla-1|1,781 |9,016 |NA      |Biological    |6|
-|ego-Facebook            |4,039 |88,234|NA      |Social        |6|
-|soc-sign-bitcoin-alpha  |3,783 |24,186|NA      |Blockchain    |6|
-|soc-sign-bitcoin-otc    |5,881 |35,592|NA      |Blockchain    |6|
-|ca-GrQc                 |5,242 |14,496|NA      |Collaboration |4|
+|Dataset                 |Nodes |Edges |Classes |Type          |BINS | Reference |
+| -                      |-     |     -|-       |-             |-    |- |
+|Cora                    |2,708 |5,429 |7       |Citation      |6|[2] |
+|Citeseer                |3,327 |4,732 |6       |Citation      |6| [2]|
+|email-Eu-core           |1,005 |25,571|42      |Email         |6| [1]|
+|USA Air-Traffic         |1,190 |13,599|4       |Flight        |3| [3]| 
+|Europe Air-Traffic      |399   |5,995 |4       |Flight        |3| [3]| 
+|Brazil Air-Traffic      |131   |1,074  |4       |Flight        |3| [3]|
+|fly-drosophila-medulla-1|1,781 |9,016 |NA      |Biological    |6| [1]|
+|ego-Facebook            |4,039 |88,234|NA      |Social        |6| [1]|
+|soc-sign-bitcoin-alpha  |3,783 |24,186|NA      |Blockchain    |6| [1]|
+|soc-sign-bitcoin-otc    |5,881 |35,592|NA      |Blockchain    |6| [1]|
+|ca-GrQc                 |5,242 |14,496|NA      |Collaboration |4| [1]|
 
 ### Compared Models
 |Model | Description|
@@ -118,3 +118,10 @@ Example:
 import pretreatment.utils as ut
 ut.load_custom_dataset("europe_airtraffic", False, True, False, " ")
 ```
+
+### References
+[1]J.  Leskovec  and  A.  Krevl,  “SNAP  Datasets:  Stanford  large  networkdataset collection.” http://snap.stanford.edu/data, June 2014.
+
+[2] M.  Wang,  L.  Yu,  D.  Zheng,  Q.  Gan,  Y.  Gai,  Z.  Ye,  M.  Li,  J.  Zhou,Q. Huang, C. Ma, Z. Huang, Q. Guo, H. Zhang, H. Lin, J. Zhao, J. Li,A. J. Smola, and Z. Zhang, “Deep graph library: Towards efficient andscalable deep learning on graphs,” inICLR Workshop on RepresentationLearning on Graphs and Manifolds, 2019.
+
+[3] J.  Wu,  J.  He,  and  J.  Xu,  “Demo-net:  Degree-specific  graph  neuralnetworks for node and graph classification,” inProceedings of the 25thACM  SIGKDD  International  Conference  on  Knowledge  Discovery  &Data Mining, pp. 406–415, 2019.
