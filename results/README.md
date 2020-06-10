@@ -802,7 +802,7 @@
 | MATRIX FACT. 	|     11.537     	|        1.14       	|      -0.166      	|
 | Node2Vec-S   	|     11.155     	|       4.119       	|      -0.032      	|
 | Node2Vec-H   	|     11.221     	|       3.598       	|      -0.019      	|
-### Classification - Brazil Air-Traffic
+### Homogeneity - Brazil Air-Traffic
 |              	| Davies Bouldin 	| Calinski Harabasz 	| Silhouette Score 	|
 |--------------	|----------------	|-------------------	|------------------	|
 | GAE_FIRST    	|    **4.05**    	|     **15.233**    	|       0.026      	|
