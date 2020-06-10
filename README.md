@@ -120,7 +120,7 @@ ut.load_custom_dataset("europe_airtraffic", False, True, False, " ")
 ```
 
 ### References
-[1]J.  Leskovec  and  A.  Krevl,  “SNAP  Datasets:  Stanford  large  networkdataset collection.” http://snap.stanford.edu/data, June 2014.
+[1] J.  Leskovec  and  A.  Krevl,  “SNAP  Datasets:  Stanford  large  networkdataset collection.” http://snap.stanford.edu/data, June 2014.
 
 [2] M.  Wang,  L.  Yu,  D.  Zheng,  Q.  Gan,  Y.  Gai,  Z.  Ye,  M.  Li,  J.  Zhou,Q. Huang, C. Ma, Z. Huang, Q. Guo, H. Zhang, H. Lin, J. Zhao, J. Li,A. J. Smola, and Z. Zhang, “Deep graph library: Towards efficient andscalable deep learning on graphs,” inICLR Workshop on RepresentationLearning on Graphs and Manifolds, 2019.
 
