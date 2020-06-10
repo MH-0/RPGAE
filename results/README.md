@@ -738,13 +738,80 @@
 ## Embedding Clusters Homogeneity
 
 ### Homogeneity - Cora
-
+|              	| Davies Bouldin 	| Calinski Harabasz 	| Silhouette Score 	|
+|--------------	|----------------	|-------------------	|------------------	|
+| GAE_FIRST    	|      2.941     	|      146.642      	|       0.074      	|
+| GAE_CONCAT   	|      3.524     	|      196.489      	|       0.087      	|
+| GAE_L1_SUM   	|      3.691     	|       82.217      	|      -0.067      	|
+| GAE_L2_SUM   	|      3.028     	|      284.764      	|       0.152      	|
+| GAE_MEAN     	|      2.369     	|      374.889      	|       0.172      	|
+| GAE_MIXED    	|    **2.098**   	|    **425.638**    	|     **0.224**    	|
+| GAE_SEPCTRAL 	|      4.925     	|       37.064      	|      -0.041      	|
+| MATRIX FACT. 	|      5.303     	|       10.181      	|      -0.196      	|
+| Node2Vec-S   	|     29.152     	|       1.016       	|      -0.035      	|
+| Node2Vec-H   	|     27.994     	|       1.118       	|      -0.039      	|
 ### Homogeneity - Citeseer
-
+|              	| Davies Bouldin 	| Calinski Harabasz 	| Silhouette Score 	|
+|--------------	|----------------	|-------------------	|------------------	|
+| GAE_FIRST    	|      4.171     	|      137.898      	|       -0.06      	|
+| GAE_CONCAT   	|      4.969     	|      157.346      	|      -0.025      	|
+| GAE_L1_SUM   	|      6.718     	|       39.683      	|      -0.209      	|
+| GAE_L2_SUM   	|       5.3      	|      208.194      	|       0.018      	|
+| GAE_MEAN     	|      3.955     	|      298.705      	|       0.085      	|
+| GAE_MIXED    	|    **3.349**   	|    **404.639**    	|     **0.184**    	|
+| GAE_SEPCTRAL 	|      9.154     	|       25.537      	|      -0.033      	|
+| MATRIX FACT. 	|      9.669     	|       10.481      	|      -0.075      	|
+| Node2Vec-S   	|     33.898     	|       1.093       	|      -0.009      	|
+| Node2Vec-H   	|     33.091     	|       1.124       	|      -0.011      	|
 ### Homogeneity - email-Eu-core
-
+|              	| Davies Bouldin 	| Calinski Harabasz 	| Silhouette Score 	|
+|--------------	|----------------	|-------------------	|------------------	|
+| GAE_FIRST    	|      4.107     	|       26.323      	|      -0.115      	|
+| GAE_CONCAT   	|      4.445     	|       24.212      	|      -0.125      	|
+| GAE_L1_SUM   	|      3.946     	|       23.43       	|      -0.157      	|
+| GAE_L2_SUM   	|      4.686     	|       23.748      	|      -0.175      	|
+| GAE_MEAN     	|      3.544     	|     **27.696**    	|      -0.078      	|
+| GAE_MIXED    	|      3.644     	|       24.047      	|    **-0.065**    	|
+| GAE_SEPCTRAL 	|    **2.976**   	|       17.198      	|      -0.123      	|
+| MATRIX FACT. 	|      3.006     	|       3.736       	|       -0.22      	|
+| Node2Vec-S   	|      8.162     	|       1.005       	|      -0.382      	|
+| Node2Vec-H   	|      8.542     	|       0.986       	|      -0.376      	|
 ### Homogeneity - USA Air-Traffic
-
+|              	| Davies Bouldin 	| Calinski Harabasz 	| Silhouette Score 	|
+|--------------	|----------------	|-------------------	|------------------	|
+| GAE_FIRST    	|    **4.756**   	|    **135.837**    	|       0.018      	|
+| GAE_CONCAT   	|      5.829     	|       98.337      	|     **0.043**    	|
+| GAE_L1_SUM   	|      4.828     	|       57.547      	|      -0.053      	|
+| GAE_L2_SUM   	|      7.867     	|       44.687      	|       0.01       	|
+| GAE_MEAN     	|      7.449     	|       29.97       	|       0.018      	|
+| GAE_MIXED    	|      8.932     	|        40.9       	|       0.022      	|
+| GAE_SEPCTRAL 	|     11.867     	|       11.016      	|      -0.082      	|
+| MATRIX FACT. 	|      9.789     	|       2.706       	|      -0.183      	|
+| Node2Vec-S   	|     24.744     	|       1.025       	|      -0.034      	|
+| Node2Vec-H   	|     25.127     	|       1.061       	|      -0.029      	|
 ### Homogeneity - Europe Air-Traffic
-
+|              	| Davies Bouldin 	| Calinski Harabasz 	| Silhouette Score 	|
+|--------------	|----------------	|-------------------	|------------------	|
+| GAE_FIRST    	|    **5.375**   	|     **33.591**    	|      -0.015      	|
+| GAE_CONCAT   	|      5.854     	|       28.543      	|    **-0.009**    	|
+| GAE_L1_SUM   	|      6.725     	|       11.521      	|       -0.06      	|
+| GAE_L2_SUM   	|      7.757     	|       9.847       	|      -0.064      	|
+| GAE_MEAN     	|     10.466     	|       5.101       	|      -0.059      	|
+| GAE_MIXED    	|     10.451     	|       5.802       	|      -0.068      	|
+| GAE_SEPCTRAL 	|      8.238     	|       12.403      	|       -0.01      	|
+| MATRIX FACT. 	|     11.537     	|        1.14       	|      -0.166      	|
+| Node2Vec-S   	|     11.155     	|       4.119       	|      -0.032      	|
+| Node2Vec-H   	|     11.221     	|       3.598       	|      -0.019      	|
 ### Classification - Brazil Air-Traffic
+|              	| Davies Bouldin 	| Calinski Harabasz 	| Silhouette Score 	|
+|--------------	|----------------	|-------------------	|------------------	|
+| GAE_FIRST    	|    **4.05**    	|     **15.233**    	|       0.026      	|
+| GAE_CONCAT   	|      4.307     	|       10.471      	|     **0.038**    	|
+| GAE_L1_SUM   	|      4.728     	|       6.504       	|      -0.005      	|
+| GAE_L2_SUM   	|      4.953     	|       4.888       	|      -0.047      	|
+| GAE_MEAN     	|      6.292     	|       3.537       	|      -0.016      	|
+| GAE_MIXED    	|      6.026     	|       3.177       	|      -0.036      	|
+| GAE_SEPCTRAL 	|      6.171     	|        3.78       	|       0.011      	|
+| MATRIX FACT. 	|      7.348     	|       0.872       	|      -0.136      	|
+| Node2Vec-S   	|     10.203     	|       1.032       	|      -0.064      	|
+| Node2Vec-H   	|     13.646     	|       1.029       	|      -0.078      	|
