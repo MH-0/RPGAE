@@ -1,6 +1,6 @@
 #  Exploring the Representational Power of Graph Autoencoders
 
-In this study, we look into the representational power of Graph Autoencoders (GAE) and verify if the following topological features are being captured in the embeddings: Degree, Local Clustering Score, Eigenvector Centrality, Betweenness Centrality. We also verify if the presence of these topological features leads to better performance on the downstream tasks of node clustering and classification. Our experimental results show that these topological features, especially the degree, are indeed preserved in the **first layer** of the GAE that employs the **SUM** aggregation rule, under the condition that the model **preserves the first order proximity**. We also find that the presence of these topological features does lead to a better performance, especially when the ground-truth is correlated with the degree of the vertex.
+In this study, we look into the representational power of Graph Autoencoders (GAE) and verify if the following topological features are being captured in the embeddings: Degree, Local Clustering Score, Eigenvector Centrality, Betweenness Centrality. We also verify if the presence of these topological features leads to better performance on the downstream tasks of node clustering and classification. Our experimental results show that these topological features, especially the degree, are indeed preserved in the **first layer** of the GAE that employs the **SUM** aggregation rule, under the condition that the model **preserves the first order proximity**. We also find that the presence of these topological features does lead to a better performance on downstream tasks, especially when the ground-truth is correlated with the degree of the vertex.
 
 ## Getting Started
 
@@ -120,7 +120,7 @@ ut.load_custom_dataset("europe_airtraffic", False, True, False, " ")
 ```
 
 ### References
-[1]J.  Leskovec  and  A.  Krevl,  “SNAP  Datasets:  Stanford  large  networkdataset collection.” http://snap.stanford.edu/data, June 2014.
+[1] J.  Leskovec  and  A.  Krevl,  “SNAP  Datasets:  Stanford  large  networkdataset collection.” http://snap.stanford.edu/data, June 2014.
 
 [2] M.  Wang,  L.  Yu,  D.  Zheng,  Q.  Gan,  Y.  Gai,  Z.  Ye,  M.  Li,  J.  Zhou,Q. Huang, C. Ma, Z. Huang, Q. Guo, H. Zhang, H. Lin, J. Zhao, J. Li,A. J. Smola, and Z. Zhang, “Deep graph library: Towards efficient andscalable deep learning on graphs,” inICLR Workshop on RepresentationLearning on Graphs and Manifolds, 2019.
 
