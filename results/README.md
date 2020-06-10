@@ -1,6 +1,8 @@
 #  Experimental Results
 
 ## Preservation of the Topological Features
+
+
 ### Degree - Cora
 |              	| Linear Regression MSE 	| Linear Regression MAE 	| Logistic Regression MacroF1 	| Logistic Regression MicroF1 	| SVM Linear MacroF1 	| SVM Linear    MicroF1 	| SVM RBF    MacroF1 	| SVM RBF MicroF1 	| MLP MacroF1 	| MLP MicroF1 	|
 |--------------	|:---------------------:	|:---------------------:	|:---------------------------:	|:---------------------------:	|:------------------:	|:---------------------:	|:------------------:	|:---------------:	|:-----------:	|:-----------:	|
