@@ -8,7 +8,7 @@ classes 0
 CLASSIFYING FEATURES
 ======================
 ..............
-gae_one
+gae_L1_SUM
 ..............
 feature                   r_mse    r_mae    lr_f1_macro    lr_f1_micro    svm_ln_f1_macro    svm_ln_f1_micro    svm_rbf_f1_macro    svm_rbf_f1_micro    mlp_f1_macro    mlp_f1_micro
 ----------------------  -------  -------  -------------  -------------  -----------------  -----------------  ------------------  ------------------  --------------  --------------
@@ -17,7 +17,7 @@ clustering                0.27     0.27           0.627          0.73           
 eigenvector_centrality    0.27     0.251          0.753          0.758              0.589              0.594               0.769               0.786           0.698           0.722
 betweenness_centrality    0.519    0.46           0.554          0.569              0.412              0.438               0.547               0.559           0.537           0.572
 ..............
-gae_sum
+gae_L2_SUM
 ..............
 feature                   r_mse    r_mae    lr_f1_macro    lr_f1_micro    svm_ln_f1_macro    svm_ln_f1_micro    svm_rbf_f1_macro    svm_rbf_f1_micro    mlp_f1_macro    mlp_f1_micro
 ----------------------  -------  -------  -------------  -------------  -----------------  -----------------  ------------------  ------------------  --------------  --------------
