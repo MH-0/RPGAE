@@ -22,7 +22,6 @@ import pretreatment.utils as ut
 
 dic_score = {}
 
-
 def classify_embeddings(embedding_model_name):
     """
     classify the embeddings of each embedding model

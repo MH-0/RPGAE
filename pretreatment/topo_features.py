@@ -14,7 +14,6 @@ from scipy.stats import entropy
 
 import pretreatment.utils as ut
 
-
 def calculate_topo_features():
     """
     Calculate topological features

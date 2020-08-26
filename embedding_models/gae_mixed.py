@@ -26,7 +26,6 @@ def gcn_reduce_custom(nodes):
     return {
         'h': torch.sum(nodes.mailbox['m'] * nodes.mailbox['w'].unsqueeze(2), dim=1)}
 
-
 class EncoderLayer(nn.Module):
     """
     Encoder layer of the auto-encoder

@@ -10,7 +10,6 @@ import evaluate_embeddings.cluster_embeddings as cl
 import evaluate_embeddings.cluster_similarity as cs
 import pretreatment.utils as ut
 
-
 def iterate_experiments(list_embedding_model_name, iterations):
     """
     iterate through the experiments for a list of models

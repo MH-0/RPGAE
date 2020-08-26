@@ -11,7 +11,6 @@ import pretreatment.utils as ut
 
 dic_score = {}
 
-
 def calculate_similarity(embedding_model_name):
     """
     calculate the similarity score of the clusters

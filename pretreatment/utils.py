@@ -20,7 +20,6 @@ number_classes = 0
 input = np.array(0)
 input_size = 0
 
-
 def load_graph(edges_file_path, top_lines_to_remove, split_char='\t', nodes_file_path='', print_details=False,
                directed=True):
     """

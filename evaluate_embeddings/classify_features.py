@@ -22,7 +22,6 @@ import pretreatment.utils as ut
 
 dic_score = {}
 
-
 def classify_features(embedding_model_name, feature_name):
     """
     classify the topological features using the model embeddings

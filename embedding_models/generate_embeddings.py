@@ -19,7 +19,6 @@ import pretreatment.utils as ut
 
 warnings.filterwarnings("ignore")
 
-
 def gae_embedding(model_name):
     """
     generate the embeddings of the Graph autoenders

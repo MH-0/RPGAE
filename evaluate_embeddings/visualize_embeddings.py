@@ -10,7 +10,6 @@ from sklearn.manifold import TSNE
 
 import pretreatment.utils as ut
 
-
 def visualise_single_embedding(embedding, model_name, plot_index, axs):
     """
     Visualize the embeddings of a model

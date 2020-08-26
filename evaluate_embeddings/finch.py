@@ -16,7 +16,6 @@ except Exception as e:
 
 RUN_FLANN = 70000
 
-
 def clust_rank(mat, initial_rank=None, distance='cosine'):
     s = mat.shape[0]
     if initial_rank is not None:

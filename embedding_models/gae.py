@@ -68,7 +68,6 @@ class EncoderLayer(nn.Module):
         h = self.drop(h)
         return h
 
-
 class DecoderLayer(nn.Module):
     """
     The decoder layer of the auto-encoder

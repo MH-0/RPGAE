@@ -17,7 +17,6 @@ from evaluate_embeddings.finch import FINCH
 
 dic_score = {}
 
-
 def score_clustering_accuracy(ground_truth, predicted):
     """
     This function calculates the clustering accuracy
