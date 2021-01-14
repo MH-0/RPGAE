@@ -31,9 +31,9 @@ def visualise_single_embedding(embedding, model_name, plot_index, axs):
     dot_colors = ["blue", "red", "orange", "green", "yellow", "cyan", "purple", "black", "pink"]
 
     label_types = ["node_labels", "degree_lables", "betweenness_centrality_lables", "clustering_lables",
-                   "eigenvector_centrality_lables"]
+                   "eigenvector_centrality_lables","triangles_lables"]
     titles = [model_name + " " + "label", model_name + " " + "degree", model_name + " " + "betweenness",
-              model_name + " " + "clustering", model_name + " " + "eigenvector"]
+              model_name + " " + "clustering", model_name + " " + "eigenvector", model_name + " " + "triangles"]
 
     plot_secondary_index = 0
     # loop through the label types and plot it
@@ -63,7 +63,7 @@ def visualize_results(save_plot= False):
     """
     visualize the embeddings of multiple models in a scatter plot
     """
-    fig, axs = plt.subplots(5, 5)
+    fig, axs = plt.subplots(6, 5)
     fig.set_figheight(16)
     fig.set_figwidth(16)
     embedding = ut.load_numpy_file(ut.embedding_path + "gae_first_embedding.npy")

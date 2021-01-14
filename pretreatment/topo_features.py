@@ -73,22 +73,31 @@ def save_topo_features():
     clustering = np.array(list(nx.clustering(ut.graph).values()))
     eigenvector_centrality = np.array(list(nx.eigenvector_centrality_numpy(ut.graph).values()))
     betweenness_centrality = np.array(list(nx.betweenness_centrality(ut.graph).values()))
+    if not ut.is_directed :
+        triangles = np.array(list(nx.triangles(ut.graph).values()))
 
 
     np.save(ut.topo_features_path + "degree.npy", degree)
     np.save(ut.topo_features_path + "clustering.npy", clustering)
     np.save(ut.topo_features_path + "eigenvector_centrality.npy", eigenvector_centrality)
     np.save(ut.topo_features_path + "betweenness_centrality.npy", betweenness_centrality)
+    if not ut.is_directed :
+        np.save(ut.topo_features_path + "triangles.npy", triangles)
 
     # concatenate the features (in case to be used as entry)
     degree = np.reshape(degree, (-1, 1))
     clustering = np.reshape(clustering, (-1, 1))
     eigenvector_centrality = np.reshape(eigenvector_centrality, (-1, 1))
     betweenness_centrality = np.reshape(betweenness_centrality, (-1, 1))
+    if not ut.is_directed :
+        triangles = np.reshape(triangles, (-1, 1))
 
     topofeatures = np.concatenate([degree, clustering], axis=1)
     topofeatures = np.concatenate([topofeatures, eigenvector_centrality], axis=1)
     topofeatures = np.concatenate([topofeatures, betweenness_centrality], axis=1)
+    if not ut.is_directed :
+        topofeatures = np.concatenate([topofeatures, triangles], axis=1)
+
     np.save(ut.topo_features_path + "topofeatures.npy", topofeatures)
     topofeatures = ut.load_numpy_file(ut.topo_features_path + "topofeatures.npy")
 
@@ -146,8 +155,12 @@ def generate_features_labels(bins):
     clustering = ut.load_numpy_file(ut.topo_features_path + "clustering.npy")
     eigenvector_centrality = ut.load_numpy_file(ut.topo_features_path + "eigenvector_centrality.npy")
     betweenness_centrality = ut.load_numpy_file(ut.topo_features_path + "betweenness_centrality.npy")
+    if not ut.is_directed:
+        triangles = ut.load_numpy_file(ut.topo_features_path + "triangles.npy")
 
     bin_feature(degree, "degree", False, bins)
     bin_feature(clustering, "clustering", False, bins)
     bin_feature(eigenvector_centrality, "eigenvector_centrality", False, bins)
     bin_feature(betweenness_centrality, "betweenness_centrality", False, bins)
+    if not ut.is_directed:
+        bin_feature(triangles, "triangles", False, bins)

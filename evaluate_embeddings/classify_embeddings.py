@@ -10,8 +10,6 @@ mlp 2 layers
 
 # import libraries
 import numpy as np
-import math
-
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_validate
 from sklearn.neural_network import MLPClassifier
@@ -21,6 +19,7 @@ from tabulate import tabulate
 import pretreatment.utils as ut
 
 dic_score = {}
+
 
 def classify_embeddings(embedding_model_name):
     """
@@ -43,13 +42,13 @@ def classify_embeddings(embedding_model_name):
     add_score(embedding_model_name, 'lr_f1_micro', np.mean(scores['test_f1_micro']))
 
     # svm linear
-    svm = SVC(kernel='linear', C=1,max_iter=max_iter)
+    svm = SVC(kernel='linear', C=1, max_iter=max_iter)
     scores = cross_validate(svm, x, y, scoring=["f1_macro", "f1_micro"])
     add_score(embedding_model_name, 'svm_ln_f1_macro', np.mean(scores['test_f1_macro']))
     add_score(embedding_model_name, 'svm_ln_f1_micro', np.mean(scores['test_f1_micro']))
 
     # svm rbf
-    svm = SVC(kernel='rbf', C=1,max_iter=max_iter)
+    svm = SVC(kernel='rbf', C=1, max_iter=max_iter)
     scores = cross_validate(svm, x, y, scoring=["f1_macro", "f1_micro"])
     add_score(embedding_model_name, 'svm_rbf_f1_macro', np.mean(scores['test_f1_macro']))
     add_score(embedding_model_name, 'svm_rbf_f1_micro', np.mean(scores['test_f1_micro']))
@@ -86,24 +85,8 @@ def setup_score(embedding_model_name):
     dic_score[embedding_model_name]["mlp_f1_micro"] = []
 
 
-def print_score():
+def save_score():
     """
-    Print the score of the classification
+    Save the score of the classification
     """
-    all_scores = []
-
-    print("")
-    print("======================")
-    print("CLASSIFYING NODE LABELS")
-    print("======================")
-
-    for emebdding_model in dic_score:
-        scores = (emebdding_model,)
-        for score in dic_score[emebdding_model]:
-            scores = scores + (str(np.round(np.mean(dic_score[emebdding_model][score]),3)),)
-        all_scores.append(scores)
-
-    print(tabulate(all_scores,
-                   headers=["model", "lr_f1_macro", "lr_f1_micro", "svm_ln_f1_macro", "svm_ln_f1_micro",
-                            "svm_rbf_f1_macro",
-                            "svm_rbf_f1_micro", "mlp_f1_macro", "mlp_f1_micro"]))
+    np.save(ut.data_path + "scores\\classify_embeddings_score", dic_score)

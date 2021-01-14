@@ -1,7 +1,8 @@
-import evaluate_embeddings.visualize_embeddings as ve
+import experiments.scores as sc
 import experiments.utils as eu
 import pretreatment.topo_features as tf
 import pretreatment.utils as ut
+import evaluate_embeddings.visualize_embeddings as ve
 
 def run(dataset_name, bins, iterations):
     # load the graph data into memory
@@ -19,9 +20,13 @@ def run(dataset_name, bins, iterations):
     # run experiments
     # ------------------
     eu.iterate_experiments(
-        ["gae_l1_sum", "gae_l2_sum", "gae_concat", "gae_first", "gae_mean", "gae_mixed", "gae_spectral",
+        ["gae_first", "gae_concat", "gae_l1_sum", "gae_l2_sum", "gae_mean", "gae_mixed", "gae_spectral",
          "matrix_factorization", "Nove2Vec_Structural", "Nod2Vec_Homophily"], iterations)
 
     # visualize results
     # ----------------------
     ve.visualize_results()
+
+    # print results
+    # ----------------------
+    sc.print_scores(dataset_name)

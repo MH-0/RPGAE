@@ -5,17 +5,16 @@ using k-means
 
 # import libraries
 import numpy as np
-
 import scipy.optimize as op
 import sklearn.metrics as sk
 from sklearn.cluster import KMeans
 from tabulate import tabulate
 
 import pretreatment.utils as ut
-
 from evaluate_embeddings.finch import FINCH
 
 dic_score = {}
+
 
 def score_clustering_accuracy(ground_truth, predicted):
     """
@@ -46,21 +45,20 @@ def cluster_embeddings(embedding_model_name):
     y = ut.node_labels
 
     clusters = KMeans(n_clusters=ut.number_classes).fit(x)
-    predicted =  clusters.labels_
+    predicted = clusters.labels_
 
     arindex = sk.adjusted_rand_score(y, predicted)
-    clustering_accuracy = score_clustering_accuracy(y,predicted)
+    clustering_accuracy = score_clustering_accuracy(y, predicted)
     nmi = sk.normalized_mutual_info_score(y, predicted)
 
     add_score(embedding_model_name, 'kmeans-acc', clustering_accuracy)
     add_score(embedding_model_name, 'kmeans-nmi', nmi)
     add_score(embedding_model_name, 'kmeans-ari', arindex)
 
-
-    c, num_clust, predicted = FINCH(x, req_clust=7)
+    c, num_clust, predicted = FINCH(x, req_clust=7,verbose=False)
 
     arindex = sk.adjusted_rand_score(y, predicted)
-    clustering_accuracy = score_clustering_accuracy(y,predicted)
+    clustering_accuracy = score_clustering_accuracy(y, predicted)
     nmi = sk.normalized_mutual_info_score(y, predicted)
 
     add_score(embedding_model_name, 'finch-acc', clustering_accuracy)
@@ -86,18 +84,9 @@ def setup_score(embedding_model_name):
     dic_score[embedding_model_name]["finch-nmi"] = []
     dic_score[embedding_model_name]["finch-ari"] = []
 
-def print_score():
-    all_scores = []
-    print("")
-    print("======================")
-    print("CLUSTER NODE LABELS")
-    print("======================")
 
-    for emebdding_model in dic_score:
-        scores = (emebdding_model,)
-        for score in dic_score[emebdding_model]:
-            scores = scores + (str(np.round(np.mean(dic_score[emebdding_model][score]),3)),)
-        all_scores.append(scores)
-
-    print(tabulate(all_scores,
-                   headers=["model","kmeans-acc", "kmeans-nmi", "kmeans-ari","finch-acc", "finch-nmi", "finch-ari"]))
+def save_score():
+    """
+    Save the score of the clustering
+    """
+    np.save(ut.data_path + "scores\\cluster_embeddings_score", dic_score)

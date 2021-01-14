@@ -28,10 +28,10 @@ def iterate_experiments(list_embedding_model_name, iterations):
     end = time.time()
 
     # print scores
-    cf.print_score()
-    ce.print_score()
-    cl.print_score()
-    cs.print_score()
+    cf.save_score()
+    ce.save_score()
+    cl.save_score()
+    cs.save_score()
 
     print()
     print()
@@ -52,6 +52,8 @@ def experiment_by_model(embedding_model_name, iterations):
     cf.setup_score(embedding_model_name, "clustering")
     cf.setup_score(embedding_model_name, "eigenvector_centrality")
     cf.setup_score(embedding_model_name, "betweenness_centrality")
+    if not ut.is_directed :
+        cf.setup_score(embedding_model_name, "triangles")
 
     # for classification of labels
     ce.setup_score(embedding_model_name)
@@ -80,6 +82,8 @@ def experiment_by_model(embedding_model_name, iterations):
         cf.classify_features(embedding_model_name, "clustering")
         cf.classify_features(embedding_model_name, "eigenvector_centrality")
         cf.classify_features(embedding_model_name, "betweenness_centrality")
+        if not ut.is_directed:
+            cf.classify_features(embedding_model_name, "triangles")
 
         # if graph has ground truth
         if ut.number_classes != 0:

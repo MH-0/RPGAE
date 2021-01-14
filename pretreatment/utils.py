@@ -19,6 +19,7 @@ node_labels = []
 number_classes = 0
 input = np.array(0)
 input_size = 0
+is_directed = False
 
 def load_graph(edges_file_path, top_lines_to_remove, split_char='\t', nodes_file_path='', print_details=False,
                directed=True):
@@ -199,6 +200,7 @@ def load_custom_dataset(dataset_name, with_attributes, with_labels, directed, se
     global number_classes
     global input
     global input_size
+    global is_directed
 
     # data folder path
     data_path = "data\\" + dataset_name + "\\"
@@ -215,10 +217,17 @@ def load_custom_dataset(dataset_name, with_attributes, with_labels, directed, se
     # pretreatment folder path
     embedding_path = data_path + "embedding\\"
 
+    # scores folder path
+    scores_path = data_path + "scores\\"
+
+    # The graph is directed
+    is_directed = directed
+
     # Load graphs
     if dataset_name == "cora":
         data = cg.load_cora()
         graph = data.graph
+        graph = nx.Graph(graph)
         node_labels = data.labels
         input = torch.tensor(data.features).float()
         # input = torch.FloatTensor([1]*len(graph.nodes)).reshape(len(node_labels),1)
@@ -226,6 +235,7 @@ def load_custom_dataset(dataset_name, with_attributes, with_labels, directed, se
     elif dataset_name == "citeseer":
         data = cg.load_citeseer()
         graph = data.graph
+        graph = nx.Graph(graph)
         node_labels = data.labels
         input = torch.tensor(data.features).float()
     else:
@@ -252,6 +262,9 @@ def load_custom_dataset(dataset_name, with_attributes, with_labels, directed, se
     Path(topo_features_path).mkdir(parents=True, exist_ok=True)
     # folder that holds the classes of the topological features
     Path(topo_features_labels_path).mkdir(parents=True, exist_ok=True)
+    # folder that holds the scores of the experiments
+    Path(scores_path).mkdir(parents=True, exist_ok=True)
+
     print("graph details:", dataset_name)
     print("------------------")
     print("nodes", len(graph.nodes))

@@ -5,14 +5,12 @@ the following classification models are used:
  -Logistic regression
  -SVM linear
  -SVM RBF
- = MPL (2 layers)
+ - MPL (2 layers)
 """
 
 # import libraries
 import numpy as np
-import math
-
-from sklearn.linear_model import LogisticRegression, LinearRegression
+from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_validate
 from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
@@ -21,6 +19,7 @@ from tabulate import tabulate
 import pretreatment.utils as ut
 
 dic_score = {}
+
 
 def classify_features(embedding_model_name, feature_name):
     """
@@ -35,7 +34,7 @@ def classify_features(embedding_model_name, feature_name):
 
     # linear regression
     r = LogisticRegression(max_iter=max_iter)
-    scores = cross_validate(r, x, y, scoring=["neg_mean_squared_error", "neg_mean_absolute_error",])
+    scores = cross_validate(r, x, y, scoring=["neg_mean_squared_error", "neg_mean_absolute_error", ])
     add_score(embedding_model_name, feature_name, 'r_mse', abs(np.mean(scores['test_neg_mean_squared_error'])))
     add_score(embedding_model_name, feature_name, 'r_mae', abs(np.mean(scores['test_neg_mean_absolute_error'])))
 
@@ -66,45 +65,62 @@ def classify_features(embedding_model_name, feature_name):
 
 def add_score(embedding_model_name, feature_name, score_name, value):
     global dic_score
-    dic_score[embedding_model_name][feature_name][score_name].append(round(value, 3))
+    dic_score[feature_name][embedding_model_name][score_name].append(round(value, 3))
 
 
 def setup_score(embedding_model_name, feature_name):
     global dic_score
-    if not embedding_model_name in dic_score:
-        dic_score[embedding_model_name] = {}
-    if not feature_name in dic_score[embedding_model_name]:
-        dic_score[embedding_model_name][feature_name] = {}
+    if not feature_name in dic_score:
+        dic_score[feature_name] = {}
+    if not embedding_model_name in dic_score[feature_name]:
+        dic_score[feature_name][embedding_model_name] = {}
 
-    dic_score[embedding_model_name][feature_name]["r_mse"] = []
-    dic_score[embedding_model_name][feature_name]["r_mae"] = []
-    dic_score[embedding_model_name][feature_name]["lr_f1_macro"] = []
-    dic_score[embedding_model_name][feature_name]["lr_f1_micro"] = []
-    dic_score[embedding_model_name][feature_name]["svm_ln_f1_macro"] = []
-    dic_score[embedding_model_name][feature_name]["svm_ln_f1_micro"] = []
-    dic_score[embedding_model_name][feature_name]["svm_rbf_f1_macro"] = []
-    dic_score[embedding_model_name][feature_name]["svm_rbf_f1_micro"] = []
-    dic_score[embedding_model_name][feature_name]["mlp_f1_macro"] = []
-    dic_score[embedding_model_name][feature_name]["mlp_f1_micro"] = []
+    dic_score[feature_name][embedding_model_name]["r_mse"] = []
+    dic_score[feature_name][embedding_model_name]["r_mae"] = []
+    dic_score[feature_name][embedding_model_name]["lr_f1_macro"] = []
+    dic_score[feature_name][embedding_model_name]["lr_f1_micro"] = []
+    dic_score[feature_name][embedding_model_name]["svm_ln_f1_macro"] = []
+    dic_score[feature_name][embedding_model_name]["svm_ln_f1_micro"] = []
+    dic_score[feature_name][embedding_model_name]["svm_rbf_f1_macro"] = []
+    dic_score[feature_name][embedding_model_name]["svm_rbf_f1_micro"] = []
+    dic_score[feature_name][embedding_model_name]["mlp_f1_macro"] = []
+    dic_score[feature_name][embedding_model_name]["mlp_f1_micro"] = []
 
 
-def print_score():
-    print("======================")
-    print("CLASSIFYING FEATURES")
-    print("======================")
+def save_score():
 
-    for emebdding_model in dic_score:
-        all_scores = []
-        print("..............")
-        print(emebdding_model)
-        print("..............")
-        for feature in dic_score[emebdding_model]:
-            scores = (feature,)
-            for score in dic_score[emebdding_model][feature]:
-                scores = scores + (str(np.round(np.mean(dic_score[emebdding_model][feature][score]),3)),)
-            all_scores.append(scores)
+    best_models = {}
+    best_model_per_score = {}
 
-        print(tabulate(all_scores,
-                       headers=["feature","r_mse","r_mae", "lr_f1_macro", "lr_f1_micro", "svm_ln_f1_macro", "svm_ln_f1_micro",
-                                "svm_rbf_f1_macro",
-                                "svm_rbf_f1_micro", "mlp_f1_macro", "mlp_f1_micro"]))
+    # determine best model per feature per score
+    for feature in dic_score:
+        best_model_per_score[feature] = {}
+        best_models[feature] = {}
+        for emebdding_model in dic_score[feature]:
+            best_models[feature][emebdding_model] = 0
+            for score in dic_score[feature][emebdding_model]:
+                score_mean_value = np.mean(dic_score[feature][emebdding_model][score])
+                if not score in best_model_per_score[feature]:
+                    best_model_per_score[feature][score] = emebdding_model
+                else:
+                    # for mse and mae we take the lowest
+                    if score in ["r_mse","r_mae"]:
+                        if score_mean_value <  np.mean(dic_score[feature][best_model_per_score[feature][score]][score]):
+                            best_model_per_score[feature][score] = emebdding_model
+                    # for the rest of scores we take the highest
+                    else:
+                        if score_mean_value >  np.mean(dic_score[feature][best_model_per_score[feature][score]][score]):
+                            best_model_per_score[feature][score] = emebdding_model
+
+    # for each model count the number of times it is has best performance
+    for feature in best_models:
+        print(feature)
+        for model in best_models[feature]:
+            for score in best_model_per_score[feature]:
+                if best_model_per_score[feature][score] == model:
+                    best_models[feature][model]+=1
+            print(model,best_models[feature][model])
+
+    # save score
+    np.save(ut.data_path + "scores\\classify_features_score", dic_score)
+    np.save(ut.data_path + "scores\\best_models", best_models)

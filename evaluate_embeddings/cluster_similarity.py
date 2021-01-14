@@ -11,6 +11,7 @@ import pretreatment.utils as ut
 
 dic_score = {}
 
+
 def calculate_similarity(embedding_model_name):
     """
     calculate the similarity score of the clusters
@@ -47,18 +48,8 @@ def setup_score(embedding_model_name):
     dic_score[embedding_model_name]["silhouette_score"] = []
 
 
-def print_score():
-    all_scores = []
-    print("")
-    print("======================")
-    print("CLUSTERS SIMILARITY")
-    print("======================")
-
-    for emebdding_model in dic_score:
-        scores = (emebdding_model,)
-        for score in dic_score[emebdding_model]:
-            scores = scores + (str(np.round(np.mean(dic_score[emebdding_model][score]), 3)),)
-        all_scores.append(scores)
-
-    print(tabulate(all_scores,
-                   headers=["model", "davies_bouldin", "calinski_harabasz", "silhouette_score"]))
+def save_score():
+    """
+    Save the score of the similarity
+    """
+    np.save(ut.data_path + "scores\\cluser_similarity_score", dic_score)
