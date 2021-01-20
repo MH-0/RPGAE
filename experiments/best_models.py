@@ -20,7 +20,7 @@ features =[]
 models = {}
 for feature in best_models:
     print(feature)
-    features.append(feature.replace("_"," "))
+    features.append(feature.replace("_"," ").capitalize())
     for model in best_models[feature]:
         print(model, best_models[feature][model])
         if not model in models:
@@ -61,5 +61,6 @@ for rect in rects:
     autolabel(rect)
 
 fig.tight_layout()
+plt.tight_layout()
 
 plt.show()

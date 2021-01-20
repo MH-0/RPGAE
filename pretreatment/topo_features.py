@@ -1,5 +1,5 @@
 """
-This file analyses the topological features (handcrafted) and divide them into classes (via binning)
+This file analyses the topological features (handcrafted) and divides them into classes (via binning)
 in order to be classified later with the embeddings
 """
 
