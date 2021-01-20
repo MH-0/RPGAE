@@ -14,13 +14,13 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from gcn_layers import BatchGraphConvolution
+from gnn_mean_layers import BatchGraphMEAN
 
 
-class BatchGCN(nn.Module):
+class BatchGNNMEAN(nn.Module):
     def __init__(self, n_units, dropout, pretrained_emb, vertex_feature,
-                 use_vertex_feature, fine_tune=False, instance_normalization=False):
-        super(BatchGCN, self).__init__()
+                 use_vertex_feature, fine_tune=False, instance_normalization=False,model_type="concat"):
+        super(BatchGNNMEAN, self).__init__()
         self.num_layer = len(n_units) - 1
         self.dropout = dropout
         self.inst_norm = instance_normalization
@@ -43,11 +43,13 @@ class BatchGCN(nn.Module):
         self.layer_stack = nn.ModuleList()
 
         for i in range(self.num_layer):
+            l1 = n_units[i]
+            l2 = n_units[i + 1]
             self.layer_stack.append(
-                BatchGraphConvolution(n_units[i], n_units[i + 1])
+                BatchGraphMEAN(l1, l2)
             )
 
-    def forward(self, x, vertices, lap, model_type):
+    def forward(self, x, vertices, lap,model_type):
         emb = self.embedding(vertices)
         if self.inst_norm:
             emb = self.norm(emb.transpose(1, 2)).transpose(1, 2)
@@ -56,8 +58,8 @@ class BatchGCN(nn.Module):
             vfeature = self.vertex_feature(vertices)
             x = torch.cat((x, vfeature), dim=2)
         for i, gcn_layer in enumerate(self.layer_stack):
-            x = gcn_layer(x, lap)
+            x = gcn_layer(x, lap,i,model_type)
             if i + 1 < self.num_layer:
-                x = F.elu(x)
+                x = torch.tanh(x)
                 x = F.dropout(x, self.dropout, training=self.training)
         return F.log_softmax(x, dim=-1)

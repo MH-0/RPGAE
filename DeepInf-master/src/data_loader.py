@@ -60,7 +60,14 @@ class InfluenceDataSet(Dataset):
                 d_root_inv = 1. / np.sqrt(np.sum(graph, axis=1))
                 graph = (graph.T * d_root_inv).T * d_root_inv
                 self.graphs[i] = graph
-        else:
+        elif model == "gnn_mean":
+            # normalized graph laplacian for GCN: D^{-1/2}AD^{-1/2}
+            for i in range(len(self.graphs)):
+                graph = self.graphs[i]
+                d = np.sum(graph, axis=1)
+                graph = (graph.T * d).T
+                self.graphs[i] = graph
+        elif model != "gnn_sum":
             raise NotImplementedError
         logger.info("graphs loaded!")
 
