@@ -120,10 +120,10 @@ import pretreatment.utils as ut
 ut.load_custom_dataset("europe_airtraffic", False, True, False, " ")
 ```
 
-### Test Case
-For the test case we use the model DeepInf [4]
-The code related to the propsed models in the test case can be found under the folder **DeepInf\"** 
-To run the experiments, use the python file **DeepInf\run_experiments.py"**  
+### Case Study
+For the case study, we use the model DeepInf [4].
+The code related to the proposed models in the case study can be found under the folder **DeepInf\"** 
+To run the experiments, use the file **DeepInf\run_experiments.py"**  
 
 ### References
 [1] J.  Leskovec  and  A.  Krevl,  “SNAP  Datasets:  Stanford  large  networkdataset collection.” http://snap.stanford.edu/data, June 2014.
