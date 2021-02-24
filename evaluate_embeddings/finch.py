@@ -1,3 +1,8 @@
+"""
+reference: Efficient Parameter-free Clustering Using First Neighbor Relations
+https://github.com/ssarfraz/FINCH-Clustering
+"""
+
 import time
 import argparse
 import numpy as np

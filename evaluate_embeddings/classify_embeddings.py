@@ -6,6 +6,7 @@ logistic regression
 svm linear
 svm rbf
 mlp 2 layers
+
 """
 
 # import libraries

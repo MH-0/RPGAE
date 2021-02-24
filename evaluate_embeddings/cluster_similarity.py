@@ -1,6 +1,7 @@
 """
 This file contains the list of functions used to evaluate
 the homogeneity of the clusters
+
 """
 
 import numpy as np

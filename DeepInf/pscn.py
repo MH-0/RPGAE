@@ -1,3 +1,9 @@
+"""
+reference : Qiu, J., Tang, J., Ma, H., Dong, Y., Wang, K., Tang, J., 2018.
+Deepinf:  Social769influence  prediction  with  deep  learning, in:
+Proceedings  of  the  24th  ACM770SIGKDD International Conference on Knowledge Discovery & Data Mining,771pp. 2110–2119.
+https://github.com/xptree/DeepInf
+"""
 #!/usr/bin/env python
 # encoding: utf-8
 # File Name: pscn.py

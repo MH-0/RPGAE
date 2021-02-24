@@ -1,6 +1,7 @@
 """
 Display a scatter plot of the embeddings colored according to the node labels and the
 topological features bin labels
+
 """
 
 # load libraries

@@ -6,6 +6,7 @@ the following classification models are used:
  -SVM linear
  -SVM RBF
  - MPL (2 layers)
+
 """
 
 # import libraries
