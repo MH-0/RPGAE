@@ -122,7 +122,9 @@ ut.load_custom_dataset("europe_airtraffic", False, True, False, " ")
 
 ### Case Study
 For the case study, we use the model DeepInf [4].
+
 The code related to the proposed models in the case study can be found under the folder **DeepInf\"** 
+
 To run the experiments, use the file **DeepInf\run_experiments.py"**  
 
 ### References
