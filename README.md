@@ -134,4 +134,4 @@ To run the experiments, use the file **"DeepInf\\run_experiments.py"**
 
 [3] J.  Wu,  J.  He,  and  J.  Xu,  “Demo-net:  Degree-specific  graph  neuralnetworks for node and graph classification,” inProceedings of the 25thACM  SIGKDD  International  Conference  on  Knowledge  Discovery  &Data Mining, pp. 406–415, 2019.
 
-[4] Qiu, J., Tang, J., Ma, H., Dong, Y., Wang, K., Tang, J., 2018.  Deepinf:  Social769influence  prediction  with  deep  learning,  in:  Proceedings  of  the  24th  ACM770SIGKDD International Conference on Knowledge Discovery & Data Mining,771pp. 2110–2119.
+[4] Qiu, J., Tang, J., Ma, H., Dong, Y., Wang, K., Tang, J., 2018.  Deepinf:  Socialinfluence  prediction  with  deep  learning,  in:  Proceedings  of  the  24th  ACMSIGKDD International Conference on Knowledge Discovery & Data Mining, pp. 2110–2119.
