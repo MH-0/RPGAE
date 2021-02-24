@@ -1,7 +1,7 @@
 #  Exploring the Representational Power of Graph Autoencoders
 
 
-In this study, we look into the representational power of Graph Autoencoders (GAE) and verify if the following topological features are being captured in the embeddings: Degree, Local Clustering Score, Eigenvector Centrality, Betweenness Centrality. We also verify if the presence of these topological features leads to better performance on the downstream tasks of node clustering and classification. Our experimental results show that these topological features, especially the degree, are indeed preserved in the **first layer** of the GAE that employs the **SUM** aggregation rule, under the condition that the model **preserves the first order proximity**. We also find that the presence of these topological features does lead to a better performance on downstream tasks, especially when the ground-truth is correlated with the degree of the vertex.
+In this study, we look into the representational power of Graph Autoencoders (GAE) and verify if the following topological features are being captured in the embeddings: Degree, Local Clustering Score, Eigenvector Centrality, Betweenness Centrality. We also verify if the presence of these topological features leads to better performance on the downstream tasks of node clustering and classification. Our experimental results show that these topological features, especially the degree, are indeed preserved in the **first layer** of the GAE that employs the **SUM** aggregation rule, under the condition that the model **preserves the second order proximity**. We also show that a model with such properties can outperform other models on certain downstream tasks, especially when the preserved features are relevant to the task at hand.  Finally, we evaluate the suitability of our findings through a test case study related to social influence prediction.
 
 ## Getting Started
 
@@ -84,18 +84,18 @@ eu.iterate_experiments(
      
 ve.visualize_results()
 ```
-- **load_dataset**: Loads a predefined dataset, the dataset name should be as defined in the  **"data\"** folder
+- **load_dataset**: Loads a predefined dataset, the dataset name should be as defined in the  **"data\\"** folder
 - **save_topo_features**: Calculates the topological features of the vertices
 - **generate_features_labels**: Performs the binning operation, according to the number of **bins** defined by the user
 - **iterate_experiments**: Takes as a parameter the list of embedding models to be tested and the number of iterations to run the experiments
 - **visualize_results**: Plots the embeddings of 4 models: gae_first, gae_concat, gae_l1_sum ,matrix_factorization
 
 ### Loading a Custom Dataset
-Place the new dataset folder in the **"data\"** folder, the graph files should be placed in a sub folder named **"graph"**
+Place the new dataset folder in the **"data\\"** folder, the graph files should be placed in a sub folder named **"graph"**
 
 example : data\newdataset\graph\
 
-3 files can be placed in the **"graph\"** folder. All files can be comma "," or tab"\t" or  space " " seperated 
+3 files can be placed in the **"graph\\"** folder. All files can be comma "," or tab"\t" or  space " " seperated 
 
 The same seperator should be used in all 3 files
 - **edges.txt**: A text file containing the list of edges  "Node1 sperator Node2" (Mandatory)
@@ -120,9 +120,18 @@ import pretreatment.utils as ut
 ut.load_custom_dataset("europe_airtraffic", False, True, False, " ")
 ```
 
+### Case Study
+For the case study, we use the model DeepInf [4].
+
+The code related to the proposed models in the case study can be found under the folder **"DeepInf\\"** 
+
+To run the experiments, use the file **"DeepInf\\run_experiments.py"**  
+
 ### References
 [1] J.  Leskovec  and  A.  Krevl,  “SNAP  Datasets:  Stanford  large  networkdataset collection.” http://snap.stanford.edu/data, June 2014.
 
 [2] M.  Wang,  L.  Yu,  D.  Zheng,  Q.  Gan,  Y.  Gai,  Z.  Ye,  M.  Li,  J.  Zhou,Q. Huang, C. Ma, Z. Huang, Q. Guo, H. Zhang, H. Lin, J. Zhao, J. Li,A. J. Smola, and Z. Zhang, “Deep graph library: Towards efficient andscalable deep learning on graphs,” inICLR Workshop on RepresentationLearning on Graphs and Manifolds, 2019.
 
 [3] J.  Wu,  J.  He,  and  J.  Xu,  “Demo-net:  Degree-specific  graph  neuralnetworks for node and graph classification,” inProceedings of the 25thACM  SIGKDD  International  Conference  on  Knowledge  Discovery  &Data Mining, pp. 406–415, 2019.
+
+[4] Qiu, J., Tang, J., Ma, H., Dong, Y., Wang, K., Tang, J., 2018.  Deepinf:  Socialinfluence  prediction  with  deep  learning,  in:  Proceedings  of  the  24th  ACMSIGKDD International Conference on Knowledge Discovery & Data Mining, pp. 2110–2119.
