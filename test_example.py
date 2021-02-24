@@ -5,8 +5,7 @@ this file is used to run the experiments on the dataset
 # loading libraries
 import experiments.run_experiments as re
 
-
-runs = 10
+runs = 1
 
 re.run("cora", 6, runs)
 re.run("citeseer", 6, runs)
@@ -21,6 +20,3 @@ re.run("facebook", 6, runs)
 re.run("socsignbitcoinalpha", 6, runs)
 re.run("socsignbitcoinot", 6, runs)
 re.run("ca-grqc", 4, runs)
-
-
-

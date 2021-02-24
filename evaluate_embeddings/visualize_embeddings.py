@@ -64,7 +64,7 @@ def visualize_results(save_plot= False):
     """
     visualize the embeddings of multiple models in a scatter plot
     """
-    fig, axs = plt.subplots(6, 5)
+    fig, axs = plt.subplots(6, 10)
     fig.set_figheight(16)
     fig.set_figwidth(16)
     embedding = ut.load_numpy_file(ut.embedding_path + "gae_first_embedding.npy")
@@ -77,6 +77,7 @@ def visualize_results(save_plot= False):
     visualise_single_embedding(embedding,"gae_l1_sum", 3, axs)
     embedding = ut.load_numpy_file(ut.embedding_path + "matrix_factorization_embedding.npy")
     visualise_single_embedding(embedding,"MF", 4, axs)
+
     for ax in axs.flat:
         ax.label_outer()
     plt.tight_layout()
