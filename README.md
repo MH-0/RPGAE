@@ -84,18 +84,18 @@ eu.iterate_experiments(
      
 ve.visualize_results()
 ```
-- **load_dataset**: Loads a predefined dataset, the dataset name should be as defined in the  **"data\"** folder
+- **load_dataset**: Loads a predefined dataset, the dataset name should be as defined in the  **"data\\"** folder
 - **save_topo_features**: Calculates the topological features of the vertices
 - **generate_features_labels**: Performs the binning operation, according to the number of **bins** defined by the user
 - **iterate_experiments**: Takes as a parameter the list of embedding models to be tested and the number of iterations to run the experiments
 - **visualize_results**: Plots the embeddings of 4 models: gae_first, gae_concat, gae_l1_sum ,matrix_factorization
 
 ### Loading a Custom Dataset
-Place the new dataset folder in the **"data\"** folder, the graph files should be placed in a sub folder named **"graph"**
+Place the new dataset folder in the **"data\\"** folder, the graph files should be placed in a sub folder named **"graph"**
 
 example : data\newdataset\graph\
 
-3 files can be placed in the **"graph\"** folder. All files can be comma "," or tab"\t" or  space " " seperated 
+3 files can be placed in the **"graph\\"** folder. All files can be comma "," or tab"\t" or  space " " seperated 
 
 The same seperator should be used in all 3 files
 - **edges.txt**: A text file containing the list of edges  "Node1 sperator Node2" (Mandatory)
@@ -123,9 +123,9 @@ ut.load_custom_dataset("europe_airtraffic", False, True, False, " ")
 ### Case Study
 For the case study, we use the model DeepInf [4].
 
-The code related to the proposed models in the case study can be found under the folder **DeepInf\\** 
+The code related to the proposed models in the case study can be found under the folder **"DeepInf\\"** 
 
-To run the experiments, use the file **DeepInf\\run_experiments.py**  
+To run the experiments, use the file **"DeepInf\\run_experiments.py"**  
 
 ### References
 [1] J.  Leskovec  and  A.  Krevl,  “SNAP  Datasets:  Stanford  large  networkdataset collection.” http://snap.stanford.edu/data, June 2014.
