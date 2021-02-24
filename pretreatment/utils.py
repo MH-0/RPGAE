@@ -1,25 +1,38 @@
 """
 This file contains miscellaneous functions used in loading and pre-treating data
 """
+
+# load libraries
 from pathlib import Path
 
 import dgl.data.citation_graph as cg
-import dgl.data.gnn_benckmark as gn
 import networkx as nx
 import numpy as np
 import torch
 
+# The data path where the datasets are located
 data_path = ""
+# The data path of the loaded dataset
 graph_path = ""
+# The path where the topological feature are saved
 topo_features_path = ""
+# The path where the topological feature classes are saved
 topo_features_labels_path = ""
+# The path where the generated embeddings are saved
 embedding_path = ""
+# The loaded dataset Networkx graph object
 graph = nx.Graph()
+# The ground truth of the loaded dataset
 node_labels = []
+# The number of ground truth classes of the loaded dataset
 number_classes = 0
+# The input (Attributes) of the loaded dataset
 input = np.array(0)
+# The dimension of the attributes of the loaded dataset
 input_size = 0
+# True of the graph is directed
 is_directed = False
+
 
 def load_graph(edges_file_path, top_lines_to_remove, split_char='\t', nodes_file_path='', print_details=False,
                directed=True):
@@ -106,7 +119,10 @@ def load_attributes(file_path, top_lines_to_remove, split_char=','):
 
         for index in range(0, len(attributes)):
             attributes[index] = attributes[index].replace('[', '').replace(']', '').replace(' ', '')
-            attributes[index] = float(attributes[index])
+            attribute_value = attributes[index].replace("\"", "")
+            if attribute_value == "":
+                attribute_value = 0
+            attributes[index] = float(attribute_value)
 
         all_attributes.append(attributes)
     return all_attributes
@@ -186,8 +202,10 @@ def load_numpy_file(file_path):
 def load_custom_dataset(dataset_name, with_attributes, with_labels, directed, separator):
     """
     loads the dataset into memory
-    :param dataset_name: The name of the dataset
+    :param dataset_name: The name of the dataset (As named in the folder data)
     :param with_attributes: if it has attributes
+    :param with_labels: if the dataset has labels (ground truth)
+    :param directed: if the graph is directed
     :param separator: the separator character in the files (" " or "," or "\t")
     """
     global data_path
@@ -230,8 +248,6 @@ def load_custom_dataset(dataset_name, with_attributes, with_labels, directed, se
         graph = nx.Graph(graph)
         node_labels = data.labels
         input = torch.tensor(data.features).float()
-        # input = torch.FloatTensor([1]*len(graph.nodes)).reshape(len(node_labels),1)
-        # input = torch.eye(len(graph.nodes))
     elif dataset_name == "citeseer":
         data = cg.load_citeseer()
         graph = data.graph
@@ -274,6 +290,10 @@ def load_custom_dataset(dataset_name, with_attributes, with_labels, directed, se
 
 
 def load_dataset(dataset_name):
+    """
+    Loads a predefined dataset into memory according to its specifications
+    :param dataset_name: the name of the dataset (as named in the folder data)
+    """
     if dataset_name == "cora":
         load_custom_dataset("cora", True, True, False, "")
     elif dataset_name == "citeseer":
@@ -282,8 +302,6 @@ def load_dataset(dataset_name):
         load_custom_dataset("eumails", False, True, True, " ")
     elif dataset_name == "facebook":
         load_custom_dataset("facebook", False, False, False, " ")
-    elif dataset_name == "terroristrel":
-        load_custom_dataset("terroristrel", False, True, True, ",")
     elif dataset_name == "flydrosophilamedulla":
         load_custom_dataset("flydrosophilamedulla", False, False, False, " ")
     elif dataset_name == "socsignbitcoinalpha":

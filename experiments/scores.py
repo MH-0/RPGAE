@@ -1,9 +1,18 @@
+"""
+This file contains the list of functions used to calculate and display the scores of the experiments
+"""
+
+# load libraries
 import numpy as np
-import pretreatment.utils as ut
 from tabulate import tabulate
 
 
 def print_classify_features_score(dataset_name):
+    """
+    This function prints the Topological features classification experiments score
+    :param dataset_name: the name of the dataset of which we want to print the experiments scores
+    """
+
     print("======================")
     print("CLASSIFYING FEATURES")
     print("======================")
@@ -36,7 +45,8 @@ def print_classify_features_score(dataset_name):
 
 def print_classify_embeddings_score(dataset_name):
     """
-    Print the score of the classification
+    This function prints the label classification experiments score
+    :param dataset_name: the name of the dataset of which we want to print the experiments scores
     """
     all_scores = []
 
@@ -63,6 +73,10 @@ def print_classify_embeddings_score(dataset_name):
 
 
 def print_cluster_embeddings_score(dataset_name):
+    """
+    This function prints the label clustering experiments score
+    :param dataset_name: the name of the dataset of which we want to print the experiments scores
+    """
     all_scores = []
     print("")
     print("======================")
@@ -85,6 +99,10 @@ def print_cluster_embeddings_score(dataset_name):
 
 
 def print_cluser_similarity_score(dataset_name):
+    """
+    This function prints the homogeneity experiments score
+    :param dataset_name: the name of the dataset of which we want to print the experiments scores
+    """
     all_scores = []
     print("")
     print("======================")
@@ -107,12 +125,20 @@ def print_cluser_similarity_score(dataset_name):
 
 
 def print_scores(dataset_name):
+    """
+    This function prints all experiements scores for a dataset
+    :param dataset_name: the name of the dataset of which we want to print the experiments scores
+    """
     print("\n\n")
     print("**********************************************************************")
     print("DATASET: ",dataset_name)
     print("**********************************************************************")
 
+    # print topological features classification scores
     print_classify_features_score(dataset_name)
+    # print labels classification scores
     print_classify_embeddings_score(dataset_name)
+    # print labels clustering scores
     print_cluster_embeddings_score(dataset_name)
+    # print homogeneity scores
     print_cluser_similarity_score(dataset_name)

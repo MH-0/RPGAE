@@ -1,10 +1,19 @@
+"""
+This file is used to plot a bar chart that shows the top performing embedding models for each of the 10 metrics over the 11 datasets
+"""
+
+# load libraries
 import numpy as np
 import os
 import matplotlib.pyplot as plt
 
+# the list of datasets
 datasets = os.listdir("..\\data\\")
 
+# A dictionary holding the best performing models
 best_models = {}
+
+# for each dataset get the best model per feature
 for dataset in datasets:
     dataset_best_models = np.load("..\\data\\" + dataset + "\\scores\\best_models.npy",
                                 allow_pickle=True).item()
@@ -27,10 +36,9 @@ for feature in best_models:
             models[model] = []
         models[model].append(best_models[feature][model])
 
-
 x = np.arange(len(features))  # the label locations
 print(x)
-width = 0.08  # the width of the bars
+width = 0.05  # the width of the bars
 
 fig, ax = plt.subplots()
 rects = []
@@ -39,7 +47,6 @@ for model in models:
     rects.append(ax.bar(x - (width /len(models.keys())) + (bar_index * width), models[model], width, label= model))
     bar_index +=1
 
-# Add some text for labels, title and custom x-axis tick labels, etc.
 ax.set_ylabel('Number of times the model came on top')
 ax.set_title('')
 ax.set_xticks(x)

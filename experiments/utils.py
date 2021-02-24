@@ -74,7 +74,7 @@ def experiment_by_model(embedding_model_name, iterations):
             ge.node2vec(embedding_model_name)
         elif embedding_model_name == "Nod2Vec_Homophily":
             ge.node2vec(embedding_model_name)
-        else:
+        elif "gae" in embedding_model_name:
             ge.gae_embedding(embedding_model_name)
 
         print("classifying features...")

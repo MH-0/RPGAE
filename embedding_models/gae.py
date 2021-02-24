@@ -54,6 +54,7 @@ class EncoderLayer(nn.Module):
 
     def forward(self, g: dgl.graph, input):
         g.ndata['h'] = input
+
         if network_type == "gae_mean":
             # broadcast all messages and aggregate them according to the mean rule
             g.update_all(gcn_message, gcn_mean_reduce)
