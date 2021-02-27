@@ -1,6 +1,5 @@
 #  Experimental Results
 
-
 ## Preservation of the Topological Features
 
 ### Degree - Cora
