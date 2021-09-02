@@ -19,6 +19,7 @@ from tabulate import tabulate
 
 import pretreatment.utils as ut
 
+# holds the results of the classification task
 dic_score = {}
 
 
@@ -62,15 +63,24 @@ def classify_embeddings(embedding_model_name):
 
 
 def add_score(embedding_model_name, score_name, value):
+    """
+    Adds the score
+    fills the variable dic_score according to the embedding model and the metric
+    (Rounds the result to 3 decimal points)
+    :param embedding_model_name: The name of the embedding model
+    :param score_name: The metric name
+    :param value: the results value
+    """
     global dic_score
     dic_score[embedding_model_name][score_name].append(round(value, 3))
 
 
 def setup_score(embedding_model_name):
     """
-    setup score dictionary to be filled
+    Prepares the score dictionary to be filled
+    Initiates the dic_score variable with the metrics and the embedding model name, to be filled later
+    with the results
     :param embedding_model_name: the name of the embedding module
-    :return:
     """
     global dic_score
     if not embedding_model_name in dic_score:
@@ -88,6 +98,6 @@ def setup_score(embedding_model_name):
 
 def save_score():
     """
-    Save the score of the classification
+    Save the score of the classification into memory
     """
     np.save(ut.data_path + "scores\\classify_embeddings_score", dic_score)

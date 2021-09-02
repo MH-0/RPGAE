@@ -10,6 +10,7 @@ from tabulate import tabulate
 
 import pretreatment.utils as ut
 
+# holds the results of the  homogeneity task
 dic_score = {}
 
 
@@ -35,11 +36,25 @@ def calculate_similarity(embedding_model_name):
 
 
 def add_score(embedding_model_name, score_name, value):
+    """
+    Adds the score
+    fills the variable dic_score according to the embedding model and the metric
+    (Rounds the result to 3 decimal points)
+    :param embedding_model_name: The name of the embedding model
+    :param score_name: The metric name
+    :param value: the results value
+    """
     global dic_score
     dic_score[embedding_model_name][score_name].append(round(value, 3))
 
 
 def setup_score(embedding_model_name):
+    """
+    Prepares the score dictionary to be filled
+    Initiates the dic_score variable with the metrics and the embedding model name, to be filled later
+    with the results
+    :param embedding_model_name: the name of the embedding module
+    """
     global dic_score
     if not embedding_model_name in dic_score:
         dic_score[embedding_model_name] = {}

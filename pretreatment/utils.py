@@ -202,22 +202,40 @@ def load_numpy_file(file_path):
 def load_custom_dataset(dataset_name, with_attributes, with_labels, directed, separator):
     """
     loads the dataset into memory
+
+    *This function fills the global variables holding information about the loaded "dataset"
+    These variables will only be read by other functions throughout the framework for ease of access
+
     :param dataset_name: The name of the dataset (As named in the folder data)
     :param with_attributes: if it has attributes
     :param with_labels: if the dataset has labels (ground truth)
     :param directed: if the graph is directed
     :param separator: the separator character in the files (" " or "," or "\t")
     """
+
+    # The list of global variables to be filled by this function
+
+    # The main path where the data is located in the system
     global data_path
+    # The path where the graph data is located
     global graph_path
+    # The path where the extracted topological features will be saved
     global topo_features_path
+    # The path where the topological features class labels will be saved
     global topo_features_labels_path
+    # The path where the embeddings will be saved
     global embedding_path
+    # The loaded dataset Networkx graph object
     global graph
+    # The ground truth classes of the loaded dataset
     global node_labels
+    # The number ground truth classes of the loaded dataset
     global number_classes
+    # The input (Attributes) of the loaded dataset
     global input
+    # The dimension of the attributes of the loaded dataset
     global input_size
+    # True of the graph is directed (Has directed edges)
     global is_directed
 
     # data folder path
